@@ -21,6 +21,8 @@ using System.Web.UI.WebControls;
 using Status = ZulipStatusUpdater.Models.Status;
 using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
+using RestSharp.Serialization.Json;
+
 
 namespace ZulipStatusUpdater
 {
@@ -88,7 +90,7 @@ namespace ZulipStatusUpdater
             var request = new RestRequest(Method.GET);
 
             request.Resource = "users.profile.get";
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
             request.AddHeader("Authorization", "Bearer " + tokenString);
             request.RequestFormat = DataFormat.Json;
 
@@ -97,7 +99,7 @@ namespace ZulipStatusUpdater
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 return null;
 
-            dynamic content = Newtonsoft.Json.Linq.JObject.Parse(response.Content);
+            dynamic content = Newtonsoft.Json.Linq.JObject.Parse(response.content);
 
             string emoji = content["profile"]["status_emoji"] ?? "";
             string text = content["profile"]["status_text"] ?? "";
@@ -223,16 +225,43 @@ namespace ZulipStatusUpdater
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 return new List<ProfileField>(0);
 
+            CustomFields custom_fields = JsonConvert.DeserializeObject<CustomFields>(response.Content);
+            var list_of_options = custom_fields.ProfileFields.Where(field => field.Type == ProfileField.FieldType.LIST_OF_OPTIONS).Select(str => str.FieldData).First();
+
+            string debug_str = "\"0\\\":{\\\"text\\\":\\\"Vim\\\",\\\"order\\\":\\\"1\\\"},\\\"1\\\":{\\\"text\\\":\\\"Emacs\\\",\\\"order\\\":\\\"2\\\"}";
+            
+             
+
+
+            //foreach (JToken option in JObject.Parse(list_of_options).Children())
+            //{
+            //    FieldDataContent fd = option.First.ToObject<FieldDataContent>();
+            //    //custom_fields.ProfileFields.Where(field => field.Type == )
+            //}
+
+            
+            
+            //var test2 = JsonConvert.DeserializeObject<FieldDataContent>(test4);
+
             dynamic content = Newtonsoft.Json.Linq.JObject.Parse(response.Content);
             foreach (var fields in content.custom_fields)
             {
                 string name = fields.name;
                 int id = fields.id;
                 int order = fields.order;
+                string hint = fields.hint;
                 ProfileField.FieldType type = fields.type;
                 ProfileField field = new ProfileField(name,id,order,type);
+                field.Hint = hint;
                 if(field.Type == ProfileField.FieldType.LIST_OF_OPTIONS || field.Type == ProfileField.FieldType.EXTERNAL_ACCOUNT)
                 {
+                    string options_list = fields.field_data;
+                    dynamic options = Newtonsoft.Json.Linq.JObject.Parse(options_list);
+                    //field.field_data = new List<string>(0);
+                    foreach(var option in options)
+                    {
+                        //field.FieldData.Add(option.Jtoken.text);
+                    }
                   // handle list of options and external account
                 }
                 ListOfProfileFields.Add(field);
@@ -271,10 +300,10 @@ namespace ZulipStatusUpdater
                 string value = fields.Value["value"].ToString();   
                 if (containsItem)
                 {
-                    list_to_fill.First(item => item.Id == int.Parse(fields.Name)).FieldData = value; 
+                    list_to_fill.First(item => item.Id == int.Parse(fields.Name)).Content = value; 
                 }
             }
-            //List<ProfileField> SortedList = ListOfProfileFields.OrderBy(o => o.Order).ToList();
+            //List<ProfileField> SortedList = ListOfProfileFields.OrderBy(o => o.order).ToList();
             if (content["result"] == "success") return list_to_fill;
             else return new List<ProfileField>(0);
         }
@@ -299,7 +328,7 @@ namespace ZulipStatusUpdater
             //request.AddJsonBody(new { A = "foo", B = "bar" });
             var json = JsonConvert.SerializeObject(
                 new[] {
-                         new {id = field_to_update.Id , value = field_to_update.FieldData },
+                         new {id = field_to_update.Id , value = field_to_update.Content },
                         }
             );
 
@@ -316,7 +345,7 @@ namespace ZulipStatusUpdater
             dynamic content = Newtonsoft.Json.Linq.JObject.Parse(response.Content);
 
 
-            //List<ProfileField> SortedList = ListOfProfileFields.OrderBy(o => o.Order).ToList();
+            //List<ProfileField> SortedList = ListOfProfileFields.OrderBy(o => o.order).ToList();
             if (content["result"] == "success") return;
             else return;
         }
