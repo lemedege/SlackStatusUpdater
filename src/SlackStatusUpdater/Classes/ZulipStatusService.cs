@@ -226,48 +226,29 @@ namespace ZulipStatusUpdater
                 return new List<ProfileField>(0);
 
             CustomFields custom_fields = JsonConvert.DeserializeObject<CustomFields>(response.Content);
-            var list_of_options = custom_fields.ProfileFields.Where(field => field.Type == ProfileField.FieldType.LIST_OF_OPTIONS).Select(str => str.FieldData).First();
-
-            string debug_str = "\"0\\\":{\\\"text\\\":\\\"Vim\\\",\\\"order\\\":\\\"1\\\"},\\\"1\\\":{\\\"text\\\":\\\"Emacs\\\",\\\"order\\\":\\\"2\\\"}";
-            
-             
-
-
-            //foreach (JToken option in JObject.Parse(list_of_options).Children())
-            //{
-            //    FieldDataContent fd = option.First.ToObject<FieldDataContent>();
-            //    //custom_fields.ProfileFields.Where(field => field.Type == )
-            //}
-
-            
-            
-            //var test2 = JsonConvert.DeserializeObject<FieldDataContent>(test4);
-
-            dynamic content = Newtonsoft.Json.Linq.JObject.Parse(response.Content);
-            foreach (var fields in content.custom_fields)
+            foreach(ProfileField list_of_options in custom_fields.ProfileFields.Where(field => field.Type == ProfileField.FieldType.LIST_OF_OPTIONS))
             {
-                string name = fields.name;
-                int id = fields.id;
-                int order = fields.order;
-                string hint = fields.hint;
-                ProfileField.FieldType type = fields.type;
-                ProfileField field = new ProfileField(name,id,order,type);
-                field.Hint = hint;
-                if(field.Type == ProfileField.FieldType.LIST_OF_OPTIONS || field.Type == ProfileField.FieldType.EXTERNAL_ACCOUNT)
+                List<FieldDataContent> fieldDataContents = new List<FieldDataContent>();
+                JObject list_options_content = JObject.Parse(list_of_options.FieldData_str);
+                foreach (JProperty list_option in list_options_content.Properties())
                 {
-                    string options_list = fields.field_data;
-                    dynamic options = Newtonsoft.Json.Linq.JObject.Parse(options_list);
-                    //field.field_data = new List<string>(0);
-                    foreach(var option in options)
-                    {
-                        //field.FieldData.Add(option.Jtoken.text);
-                    }
-                  // handle list of options and external account
+                    FieldDataContent fieldDataContent = new FieldDataContent();
+                    fieldDataContent.Text = list_option.Value["text"].ToString();
+                    fieldDataContent.Order = (int)list_option.Value["order"];
+
+                    fieldDataContents.Add(fieldDataContent);
+                    
                 }
-                ListOfProfileFields.Add(field);
+                list_of_options.FieldData = fieldDataContents;
+
             }
-            List<ProfileField> SortedList = ListOfProfileFields.OrderBy(o => o.Order).ToList();
-            if (content["result"] == "success") return SortedList;
+
+            //FieldDataContent field_data = JsonConvert.DeserializeObject<FieldDataContent>(custom_fields.ProfileFields[3].FieldData);
+            //var list_of_options = custom_fields.ProfileFields.Where(field => field.Type == ProfileField.FieldType.LIST_OF_OPTIONS).Select(str => str.FieldData).First();
+
+            ListOfProfileFields = custom_fields.ProfileFields.ToList();
+
+            if (custom_fields.Result == "success") return ListOfProfileFields;
             else return new List<ProfileField>(0);
         }
 

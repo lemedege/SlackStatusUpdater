@@ -46,7 +46,10 @@ namespace ZulipStatusUpdater.Models
         [JsonProperty("hint")]
         public string Hint { get; set; }
 
-        //[JsonProperty("field_data")]
+        [JsonProperty("field_data")]
+        public String FieldData_str { get; set; }
+
+
         [JsonIgnore]
         public List<FieldDataContent> FieldData { get; set; }
 

@@ -80,7 +80,12 @@ namespace ZulipStatusUpdater
                     case ProfileField.FieldType.LONG_TEXT:
                         break;
                     case ProfileField.FieldType.LIST_OF_OPTIONS:
-                        tableProfileFields.Controls.Add(new ComboBox() { Dock = DockStyle.Fill, Tag = field.Id }, 1, tableProfileFields.RowCount - 1);
+                        ComboBox cbox = new ComboBox() { Dock = DockStyle.Fill, Tag = field.Id };
+                        foreach (FieldDataContent option in field.FieldData)
+                        {
+                            cbox.Items.Add(option.Text);
+                        }
+                        tableProfileFields.Controls.Add(cbox, 1, tableProfileFields.RowCount - 1);
                         break;
 
 
