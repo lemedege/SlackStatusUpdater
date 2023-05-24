@@ -12,6 +12,8 @@ using System.Reflection;
 using System.Web.UI.WebControls;
 using Label = System.Windows.Forms.Label;
 using TextBox = System.Windows.Forms.TextBox;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace ZulipStatusUpdater
 {
@@ -84,7 +86,10 @@ namespace ZulipStatusUpdater
                         foreach (FieldDataContent option in field.FieldData)
                         {
                             cbox.Items.Add(option.Text);
+                            if(field.Content == option.Value) { cbox.SelectedIndex = cbox.Items.IndexOf(option.Text); };
+                            
                         }
+                        //cbox.SelectedIndex = filled_fields.;
                         tableProfileFields.Controls.Add(cbox, 1, tableProfileFields.RowCount - 1);
                         break;
 

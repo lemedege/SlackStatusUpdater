@@ -226,6 +226,8 @@ namespace ZulipStatusUpdater
                 return new List<ProfileField>(0);
 
             CustomFields custom_fields = JsonConvert.DeserializeObject<CustomFields>(response.Content);
+            // Automatic deserialization is not working for the FieldData content of the response. 
+            // This loops implements getting options for a combobox
             foreach(ProfileField list_of_options in custom_fields.ProfileFields.Where(field => field.Type == ProfileField.FieldType.LIST_OF_OPTIONS))
             {
                 List<FieldDataContent> fieldDataContents = new List<FieldDataContent>();
@@ -235,19 +237,14 @@ namespace ZulipStatusUpdater
                     FieldDataContent fieldDataContent = new FieldDataContent();
                     fieldDataContent.Text = list_option.Value["text"].ToString();
                     fieldDataContent.Order = (int)list_option.Value["order"];
-
+                    fieldDataContent.Value = list_option.Name;
                     fieldDataContents.Add(fieldDataContent);
-                    
                 }
-                list_of_options.FieldData = fieldDataContents;
-
+                list_of_options.FieldData = fieldDataContents.OrderBy(o => o.Order).ToList();
             }
 
-            //FieldDataContent field_data = JsonConvert.DeserializeObject<FieldDataContent>(custom_fields.ProfileFields[3].FieldData);
-            //var list_of_options = custom_fields.ProfileFields.Where(field => field.Type == ProfileField.FieldType.LIST_OF_OPTIONS).Select(str => str.FieldData).First();
 
             ListOfProfileFields = custom_fields.ProfileFields.ToList();
-
             if (custom_fields.Result == "success") return ListOfProfileFields;
             else return new List<ProfileField>(0);
         }

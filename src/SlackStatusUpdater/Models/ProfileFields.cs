@@ -78,6 +78,12 @@ namespace ZulipStatusUpdater.Models
         public string Text { get; set; }
 
         [JsonProperty("order")]
+        // Order is the order of the list
         public int Order { get; set; }
+
+        [JsonIgnore]
+        // Value is the root key "0:"
+        public string Value { get; set; }
+
     }
 }
