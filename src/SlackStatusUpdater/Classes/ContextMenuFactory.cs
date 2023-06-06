@@ -13,8 +13,7 @@ namespace ZulipStatusUpdater
     public static class ContextMenuFactory
     {
         // Private field for the settings form to help ensure only one instance of it is opened
-        private static SettingsForm _settingsForm;
-        public static bool test_bool;
+        private static ProfileForm _profileForm;
         
         /// <summary>
         /// Create the context menu for the tray icon.
@@ -74,13 +73,13 @@ namespace ZulipStatusUpdater
         private static void SettingsItem_Click(object sender, EventArgs e)
         {
             // Check that settings form is not already open
-            if (_settingsForm == null || _settingsForm.IsDisposed)
+            if (_profileForm == null || _profileForm.IsDisposed)
             {
                 // Open settings form
-                _settingsForm = SettingsForm.GetInstance;
-                _settingsForm.FormBorderStyle = FormBorderStyle.FixedDialog;
-                _settingsForm.ShowDialog();
-                _settingsForm.Dispose();
+                _profileForm = ProfileForm.GetInstance;
+                _profileForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                _profileForm.ShowDialog();
+                _profileForm.Dispose();
             }
         }
 
@@ -91,7 +90,7 @@ namespace ZulipStatusUpdater
         /// <param name="e"></param>
         private static void disableItem_Changed(object sender, EventArgs e)
         {
-            SettingsManager.GetSettings().disableStatusUpdate = test_bool;
+            //SettingsManager.GetSettings().disableStatusUpdate = test_bool;
         }
 
 

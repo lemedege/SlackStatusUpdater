@@ -16,7 +16,7 @@ namespace ZulipStatusUpdater
     class RunIcon : ApplicationContext
     {
         // Private field for the settings form to help ensure only one instance of it is opened
-        private static SettingsForm _settingsForm;
+        private static ProfileForm _profileForm;
         //Component declarations
         public NotifyIcon TrayIcon;
         private ContextMenuStrip TrayIconContextMenu;
@@ -145,13 +145,13 @@ namespace ZulipStatusUpdater
         private void SettingsItem_Click(object sender, EventArgs e)
         {
             // Check that settings form is not already open
-            if (_settingsForm == null || _settingsForm.IsDisposed)
+            if (_profileForm == null || _profileForm.IsDisposed)
             {
                 // Open settings form
-                _settingsForm = SettingsForm.GetInstance;
-                _settingsForm.FormBorderStyle = FormBorderStyle.FixedDialog;
-                _settingsForm.ShowDialog();
-                _settingsForm.Dispose();
+                _profileForm = ProfileForm.GetInstance;
+                _profileForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                _profileForm.ShowDialog();
+                _profileForm.Dispose();
             }
         }
 
