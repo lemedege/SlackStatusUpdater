@@ -63,6 +63,35 @@ namespace ZulipStatusUpdater
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
+        public static bool SetZulipPresence(ActivityMonitor.ActivityState presence)
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
+            var formData = new List<KeyValuePair<string, string>>() {
+                //new KeyValuePair<string, string>("status", presence.ToString().ToLower()),
+                new KeyValuePair<string, string>("status", "active"),
+                new KeyValuePair<string, string>("ping_only", "true"),
+                //new KeyValuePair<string, string>("new_user_input","true"),
+                //new KeyValuePair<string, string>("slim_presence","true")
+            };
+
+
+            var client = new RestClient(SettingsManager.GetSettings().ZulipRealm + "/api/v1/users/me/presence");
+            client.Authenticator = new HttpBasicAuthenticator(SettingsManager.GetSettings().ZulipEmail, SettingsManager.GetSettings().ZulipApikey);
+
+            var request = new RestRequest(Method.POST);
+
+            request.RequestFormat = DataFormat.Json;
+            foreach (var p in formData)
+            {
+                request.AddParameter(p.Key, p.Value);
+            }
+
+            var response = client.Execute(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
         /// <summary>
         /// Get zulip status from the API
         /// </summary>

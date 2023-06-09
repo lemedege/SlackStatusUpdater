@@ -34,6 +34,14 @@ namespace ZulipStatusUpdater.Models
         [XmlElement("disable-status-update")]
         public bool disableStatusUpdate { get; set; }
 
+        [XmlElement("idle-threshold-ms")]
+        public double idleThreshold { get; set; }
+
+        [XmlElement("offline-threshold-ms")]
+        public double offlineThreshold { get; set; }
+
+        [XmlElement("disable-presence-update")]
+        public bool disablePresenceUpdate { get; set; }
 
         [XmlElement("use-wifi")]
         public bool usewifi { get; set; }

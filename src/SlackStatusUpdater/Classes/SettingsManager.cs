@@ -95,6 +95,8 @@ namespace ZulipStatusUpdater
                 ZulipEmail = "example@example.com",
                 ZulipApikey = "Enter password and press Get API key",
                 local_server = "192.168.111.100",
+                idleThreshold = 1000 * 140,
+                offlineThreshold = 1000 * 60 * 30,
                 DefaultStatus = new Status()
                 {
                     Emoji = "house",

@@ -39,7 +39,6 @@ namespace ZulipStatusUpdater
             _timer = new Timer(2000);
             _timer.Elapsed += _timer_Elapsed;
             _timer.Start();
-
             
         }
 
@@ -87,6 +86,18 @@ namespace ZulipStatusUpdater
                     _previousIP = localIP;
                 }
 
+            }
+
+            ActivityMonitor.ActivityState currentPresence = ActivityMonitor.GetPresenceUpdate();
+            //Program.runicon.Say(((int)currentPresence).ToString());
+
+            if (!SettingsManager.GetSettings().disablePresenceUpdate)
+            {
+                if (currentPresence != ActivityMonitor.ActivityState.OFFLINE)
+                {
+                    //Program.runicon.Say(currentPresence.ToString());
+                    var succes = ZulipStatusService.SetZulipPresence(ActivityMonitor.ActivityState.IDLE);
+                }
             }
         }
     }
