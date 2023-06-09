@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,80 +8,82 @@ using System.Xml.Serialization;
 
 namespace ZulipStatusUpdater.Models
 {
-    /// <summary>
-    /// Profile Fields
-    /// </summary>
-    [XmlRoot("ProfileFields")]
-    public class ProfileFields
+    public class CustomFields
     {
-        [XmlInclude(typeof(ProfileField))] // include type class Person
-        public class PersonalList
+        [JsonProperty("result")]
+        public string Result { get; set; }
+
+        [JsonProperty("msg")]
+        public string Msg { get; set; }
+
+        [JsonProperty("custom_fields")]
+        public List<ProfileField> ProfileFields { get; set; }
+    }
+
+    public class ProfileField
+    {
+        public enum FieldType
         {
-            [XmlArray("ProfileFieldArray")]
-            [XmlArrayItem("ProfileFieldObject")]
-            public List<ProfileField> ProfileFields = new List<ProfileField>();
-
-            [XmlElement("Listname")]
-            public string Listname { get; set; }
-
-            // Konstruktoren 
-            public PersonalList() { }
-
-            public PersonalList(string name)
-            {
-                this.Listname = name;
-            }
-
-            public void AddField(ProfileField field)
-            {
-                ProfileFields.Add(field);
-            }
+            SHORT_TEXT = 1,
+            LONG_TEXT = 2,
+            LIST_OF_OPTIONS,
+            DATE_PICKER,
+            LINK,
+            PERSON_PICKER,
+            EXTERNAL_ACCOUNT,
+            PRONOUNS
         }
 
+        [JsonProperty("id")]
+        public long Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("type")]
+        public FieldType Type { get; set; }
+
+        [JsonProperty("hint")]
+        public string Hint { get; set; }
+
+        [JsonProperty("field_data")]
+        public String FieldData_str { get; set; }
+
+
+        [JsonIgnore]
+        public List<FieldDataContent> FieldData { get; set; }
+
+        [JsonProperty("order")]
+        public int Order { get; set; }
+
+        [JsonProperty("display_in_profile_summary", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? DisplayInProfileSummary { get; set; }
+
+        public string Content { get; set; }
+
+        public ProfileField(string name, int id, int order, FieldType type)
+        {
+            this.Name = name;
+            this.Order = order;
+            this.Type = type;
+            this.Id = id;
+            this.Content = "";
+        }
     }
-}
 
-[XmlType("ProfileField")] // define Type
-public class ProfileField
-{
-    public enum FieldType
+    public class FieldDataContent
     {
-        SHORT_TEXT = 1,
-        LONG_TEXT = 2,
-        LIST_OF_OPTIONS,
-        DATE_PICKER,
-        LINK,
-        PERSON_PICKER,
-        EXTERNAL_ACCOUNT,
-        PRONOUNS
-    }
 
+        [JsonProperty("text")]
+        public string Text { get; set; }
 
+        [JsonProperty("order")]
+        // Order is the order of the list
+        public int Order { get; set; }
 
-    [XmlElement("Name", DataType = "string")]
-    public string Name { get; set; }
+        [JsonIgnore]
+        // Value is the root key "0:"
+        public string Value { get; set; }
 
-    [XmlElement("ID")]
-    public int Id { get; set; }
-
-    [XmlElement("Order")]
-    public int Order { get; set; }
-
-    [XmlElement("Type")]
-    public FieldType Type { get; set; }
-
-    [XmlElement("FieldData")]
-    public string FieldData { get; set;}
-
-    // Konstruktoren 
-    //public ProfileField() { }
-
-    public ProfileField(string name, int id, int order, FieldType type)
-    {
-        this.Name = name;
-        this.Order = order;
-        this.Type = type;
-        this.Id = id;
-        this.FieldData = "";
     }
 }

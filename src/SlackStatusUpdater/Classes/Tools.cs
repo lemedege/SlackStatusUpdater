@@ -11,7 +11,7 @@ namespace ZulipStatusUpdater.Classes
     {
         // using Microsoft.Win32; do not forget!
         /// </summary>
-        /// <param name="protocolName">Name of the protocol (e.g. "zulip"")</param>
+        /// <param name="protocolName">name of the protocol (e.g. "zulip"")</param>
         /// <param name="applicationPath">Complete file system path to the EXE file, which processes the URL being called.</param>
         public static void RegisterURLProtocol(string protocolName, string applicationPath)
         {

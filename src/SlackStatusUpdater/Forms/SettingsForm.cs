@@ -12,6 +12,8 @@ using System.Reflection;
 using System.Web.UI.WebControls;
 using Label = System.Windows.Forms.Label;
 using TextBox = System.Windows.Forms.TextBox;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace ZulipStatusUpdater
 {
@@ -19,6 +21,8 @@ namespace ZulipStatusUpdater
     {
         //storing last used OTP for SSO login
         byte[] otp;
+
+        List<ProfileField> filled_fields;
 
 
         // Singleton instance field
@@ -63,22 +67,30 @@ namespace ZulipStatusUpdater
             tableProfileFields.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
             List<ProfileField> fields = ZulipStatusService.GetCustomProfileFields();
-            List<ProfileField> content = ZulipStatusService.FillCustomProfileFields();
+            filled_fields = ZulipStatusService.FillCustomProfileFields(fields);
             //List<string> fields = new List<string>();
             //tableProfileFields.RowCount = fields.Count;
-            foreach (ProfileField field in fields)
+            foreach (ProfileField field in filled_fields)
             {
                 tableProfileFields.RowCount++;
                 tableProfileFields.Controls.Add(new Label() { Text = field.Name.Normalize(), Dock = DockStyle.Fill }, 0, tableProfileFields.RowCount-1);
                 switch (field.Type)
                 {
                     case ProfileField.FieldType.SHORT_TEXT:
-                        tableProfileFields.Controls.Add(new TextBox() { Dock = DockStyle.Fill }, 1, tableProfileFields.RowCount - 1);
+                        tableProfileFields.Controls.Add(new TextBox() { Dock = DockStyle.Fill, Text = field.Content, Tag = field.Id }, 1, tableProfileFields.RowCount - 1);
                         break;
                     case ProfileField.FieldType.LONG_TEXT:
                         break;
                     case ProfileField.FieldType.LIST_OF_OPTIONS:
-                        tableProfileFields.Controls.Add(new ComboBox() { Dock = DockStyle.Fill }, 1, tableProfileFields.RowCount - 1);
+                        ComboBox cbox = new ComboBox() { Dock = DockStyle.Fill, Tag = field.Id };
+                        foreach (FieldDataContent option in field.FieldData)
+                        {
+                            cbox.Items.Add(option.Text);
+                            if(field.Content == option.Value) { cbox.SelectedIndex = cbox.Items.IndexOf(option.Text); };
+                            
+                        }
+                        //cbox.SelectedIndex = filled_fields.;
+                        tableProfileFields.Controls.Add(cbox, 1, tableProfileFields.RowCount - 1);
                         break;
 
 
@@ -124,6 +136,26 @@ namespace ZulipStatusUpdater
         {
             // Save changes made to settings
             SettingsManager.ApplySettings(_settings);
+
+            foreach(ProfileField field in filled_fields)
+            {
+                var match = tableProfileFields.Controls.Find(field.Id.ToString(), true);
+                foreach(Control tb in tableProfileFields.Controls.OfType<TextBox>())
+                {
+                    if (tb.Tag.ToString() == field.Id.ToString())
+                    {
+                        if (field.Content != tb.Text)
+                        {
+                            field.Content = tb.Text;
+                            ZulipStatusService.UpdateProfileOnServer(field);
+                        }
+                        break;
+                    }
+
+                }
+                    //.Where(box => box.Tag.ToString() == "2491");
+                //.Select(box => box.Text).First().ToString();
+                }
 
             this.Dispose();
 
