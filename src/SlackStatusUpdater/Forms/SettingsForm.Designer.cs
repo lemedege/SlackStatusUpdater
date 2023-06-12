@@ -259,7 +259,7 @@
             this.SSObtn.TabIndex = 24;
             this.SSObtn.Text = "Google SSO";
             this.SSObtn.UseVisualStyleBackColor = true;
-            this.SSObtn.Click += new System.EventHandler(this.button1_Click);
+            this.SSObtn.Click += new System.EventHandler(this.SSO_1st_step_Click);
             // 
             // SSObtnAfter
             // 
@@ -269,7 +269,7 @@
             this.SSObtnAfter.TabIndex = 26;
             this.SSObtnAfter.Text = "Press here after SSO login";
             this.SSObtnAfter.UseVisualStyleBackColor = true;
-            this.SSObtnAfter.Click += new System.EventHandler(this.button2_Click);
+            this.SSObtnAfter.Click += new System.EventHandler(this.SSO_2nd_step_Click);
             // 
             // tableProfileFields
             // 

@@ -386,7 +386,7 @@ namespace ZulipStatusUpdater
         // the (encrypted) token, saving it to the settingsfile and killing it self. 
         // Then DecryptAPIkeySSO can be called using the saved auth token and secret. 
 
-        public static byte[] GoogleSSOLogin() {
+        public static byte[] GoogleSSOLogin(string realm) {
 
             var randomGenerator = System.Security.Cryptography.RandomNumberGenerator.Create();
 
@@ -397,7 +397,7 @@ namespace ZulipStatusUpdater
 
             var settings = SettingsManager.GetSettings();
 
-            string target = settings.ZulipRealm + "/accounts/login/google/?mobile_flow_otp=";
+            string target = realm + "/accounts/login/google/?mobile_flow_otp=";
             target += randomString;
 
             System.Diagnostics.Process.Start(target);

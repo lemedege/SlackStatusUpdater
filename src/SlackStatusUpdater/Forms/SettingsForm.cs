@@ -187,12 +187,13 @@ namespace ZulipStatusUpdater
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            otp = ZulipStatusService.GoogleSSOLogin();
+        private void SSO_1st_step_Click(object sender, EventArgs e)
+        {             
+            string realm = Classes.Tools.TidyUpURL(tboZulipRealmURL.Text);
+            otp = ZulipStatusService.GoogleSSOLogin(realm);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void SSO_2nd_step_Click(object sender, EventArgs e)
         {
             var settings = SettingsManager.GetSettings();
             string apikey = ZulipStatusService.DecryptAPIkeySSO(settings.LastOTPEncryptedApiToken, otp);
