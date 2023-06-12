@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,19 @@ namespace ZulipStatusUpdater.Models
     [XmlRoot("settings")]
     public class Settings
     {
+        
+        public Settings()
+        {
+            ZulipRealm = Classes.Tools.TidyUpURL("chat.zulipchat.com");
+            ZulipEmail = "example@example.com";
+            ZulipApikey = "Enter password and press Get API key";
+            local_server = "192.168.111.100";
+            idleThreshold = 1000 * 140;
+            offlineThreshold = 1000 * 60 * 30;
+           
+
+        }
+
         [XmlElement("last-otp-encrypted-api-token")]
         public string LastOTPEncryptedApiToken { get; set; }
 
@@ -35,10 +49,10 @@ namespace ZulipStatusUpdater.Models
         public bool disableStatusUpdate { get; set; }
 
         [XmlElement("idle-threshold-ms")]
-        public double idleThreshold { get; set; }
+        public int idleThreshold { get; set; }
 
         [XmlElement("offline-threshold-ms")]
-        public double offlineThreshold { get; set; }
+        public int offlineThreshold { get; set; }
 
         [XmlElement("disable-presence-update")]
         public bool disablePresenceUpdate { get; set; }
@@ -60,6 +74,9 @@ namespace ZulipStatusUpdater.Models
 
         [XmlElement("wifi-config")]
         public List<StatusProfile> StatusProfiles { get; set; }
+
+
+
 
     }
 }

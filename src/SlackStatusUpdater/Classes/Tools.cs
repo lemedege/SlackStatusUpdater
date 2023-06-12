@@ -68,6 +68,18 @@ namespace ZulipStatusUpdater.Classes
             return result;
         }
 
+        // <summary>
+        /// Checks whether the URL includes https:// or not and adds it if necessary. Also removes any trailing slash.
+        /// </summary>
+        /// <param name="ServerURL"></param>
+        /// <returns></returns>
+        public static string TidyUpURL(string ServerURL)
+        {
+            string Result = ServerURL.StartsWith("https://") ? ServerURL : "https://" + ServerURL;
+            Result = Result.EndsWith("/") ? Result.Remove(Result.LastIndexOf('/')) : Result;
+
+            return Result;
+        }
 
 
     }

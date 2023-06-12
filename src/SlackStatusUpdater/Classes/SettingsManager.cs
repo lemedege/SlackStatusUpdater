@@ -64,13 +64,14 @@ namespace ZulipStatusUpdater
 
         }
 
+
         /// <summary>
         /// Apply and save new settings
         /// </summary>
         /// <param name="settings">Settings to apply</param>
         public static void ApplySettings(Settings settings)
         {
-            settings.ZulipRealm = TidyUpURL(settings.ZulipRealm);
+            settings.ZulipRealm = Classes.Tools.TidyUpURL(settings.ZulipRealm);
             // Write to settings file
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Settings));
             using (TextWriter textWriter = new StreamWriter(SettingsFilePath))
@@ -90,13 +91,6 @@ namespace ZulipStatusUpdater
         {
             var defaultSettings = new Settings()
             {
-
-                ZulipRealm = TidyUpURL("chat.zulipchat.com"),
-                ZulipEmail = "example@example.com",
-                ZulipApikey = "Enter password and press Get API key",
-                local_server = "192.168.111.100",
-                idleThreshold = 1000 * 140,
-                offlineThreshold = 1000 * 60 * 30,
                 DefaultStatus = new Status()
                 {
                     Emoji = "house",
@@ -123,7 +117,6 @@ namespace ZulipStatusUpdater
                     }
                 }
             };
-
             if (!Directory.Exists(SettingsFileDirectoryPath))
                 Directory.CreateDirectory(SettingsFileDirectoryPath);
 
@@ -136,16 +129,19 @@ namespace ZulipStatusUpdater
         }
 
         /// <summary>
-        /// Checks whether the URL includes https:// or not and adds it if necessary. Also removes any trailing slash.
+        /// Delete Settings.xml
         /// </summary>
-        /// <param name="ServerURL"></param>
         /// <returns></returns>
-        private static string TidyUpURL(string ServerURL)
+        private static void DeleteSettingsFile()
         {
-            string Result = ServerURL.StartsWith("https://") ? ServerURL : "https://" + ServerURL;
-            Result = Result.EndsWith("/") ? Result.Remove(Result.LastIndexOf('/')) : Result;
-
-            return Result;
+            if (File.Exists(SettingsFilePath))
+            {
+                File.Delete(SettingsFilePath);
+            }
         }
+
+
+
+        
     }
 }

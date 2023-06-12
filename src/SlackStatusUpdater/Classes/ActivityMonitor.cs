@@ -5,8 +5,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZulipStatusUpdater.Models;
 
-namespace ZulipStatusUpdater.Classes
+namespace ZulipStatusUpdater
 {
     public static class ActivityMonitor
     {
@@ -43,17 +44,18 @@ namespace ZulipStatusUpdater.Classes
 
         public static ActivityState GetPresenceUpdate()
         {
+            Settings settings = SettingsManager.GetSettings();
             DateTime lastInput = GetLastInputTime();
             DateTime currentTime = DateTime.Now;
 
             TimeSpan timeSinceInput = currentTime - lastInput;
 
-            if (timeSinceInput.TotalMilliseconds > SettingsManager.GetSettings().offlineThreshold)
+            if (timeSinceInput.TotalMilliseconds > settings.offlineThreshold)
             {
                 return ActivityState.OFFLINE;
             }
              
-            else if (timeSinceInput.TotalMilliseconds > SettingsManager.GetSettings().idleThreshold)
+            else if (timeSinceInput.TotalMilliseconds > settings.idleThreshold)
             {
                 return ActivityState.IDLE;
             }
