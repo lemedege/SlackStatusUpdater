@@ -197,7 +197,7 @@ namespace ZulipStatusUpdater
         {
             var settings = SettingsManager.GetSettings();
             string apikey = ZulipStatusService.DecryptAPIkeySSO(settings.LastOTPEncryptedApiToken, otp);
-            Program.runicon.Say(apikey);
+            //Program.runicon.Say(apikey);
             tboApiToken.Text = apikey;
             tboZulipUser.Text = settings.ZulipEmail;
         }
