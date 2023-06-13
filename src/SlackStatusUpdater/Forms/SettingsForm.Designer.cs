@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.label1 = new System.Windows.Forms.Label();
-            this.tboApiToken = new System.Windows.Forms.TextBox();
             this.dgWifi = new System.Windows.Forms.DataGridView();
             this.btnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,10 +43,7 @@
             this.tboZulipRealmURL = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tboZulipUser = new System.Windows.Forms.TextBox();
-            this.tboZulipPassword = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.btnGetAPIkey = new System.Windows.Forms.Button();
             this.cboDefaultSendIP = new System.Windows.Forms.CheckBox();
             this.cboUsewifi = new System.Windows.Forms.CheckBox();
             this.SSObtn = new System.Windows.Forms.Button();
@@ -57,22 +52,6 @@
             this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgWifi)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(377, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Zulip API key:";
-            // 
-            // tboApiToken
-            // 
-            this.tboApiToken.Location = new System.Drawing.Point(465, 35);
-            this.tboApiToken.Name = "tboApiToken";
-            this.tboApiToken.Size = new System.Drawing.Size(202, 20);
-            this.tboApiToken.TabIndex = 10;
             // 
             // dgWifi
             // 
@@ -192,16 +171,9 @@
             // 
             this.tboZulipUser.Location = new System.Drawing.Point(95, 6);
             this.tboZulipUser.Name = "tboZulipUser";
+            this.tboZulipUser.ReadOnly = true;
             this.tboZulipUser.Size = new System.Drawing.Size(192, 20);
             this.tboZulipUser.TabIndex = 16;
-            // 
-            // tboZulipPassword
-            // 
-            this.tboZulipPassword.Location = new System.Drawing.Point(95, 35);
-            this.tboZulipPassword.Name = "tboZulipPassword";
-            this.tboZulipPassword.Size = new System.Drawing.Size(192, 20);
-            this.tboZulipPassword.TabIndex = 17;
-            this.tboZulipPassword.UseSystemPasswordChar = true;
             // 
             // label8
             // 
@@ -211,25 +183,6 @@
             this.label8.Size = new System.Drawing.Size(56, 13);
             this.label8.TabIndex = 18;
             this.label8.Text = "Zulip user:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 38);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 13);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "Zulip Password:";
-            // 
-            // btnGetAPIkey
-            // 
-            this.btnGetAPIkey.Location = new System.Drawing.Point(212, 61);
-            this.btnGetAPIkey.Name = "btnGetAPIkey";
-            this.btnGetAPIkey.Size = new System.Drawing.Size(75, 23);
-            this.btnGetAPIkey.TabIndex = 20;
-            this.btnGetAPIkey.Text = "Get API key";
-            this.btnGetAPIkey.UseVisualStyleBackColor = true;
-            this.btnGetAPIkey.Click += new System.EventHandler(this.btnGetAPIkey_Click);
             // 
             // cboDefaultSendIP
             // 
@@ -305,10 +258,7 @@
             this.Controls.Add(this.SSObtn);
             this.Controls.Add(this.cboUsewifi);
             this.Controls.Add(this.cboDefaultSendIP);
-            this.Controls.Add(this.btnGetAPIkey);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.tboZulipPassword);
             this.Controls.Add(this.tboZulipUser);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.tboZulipRealmURL);
@@ -323,8 +273,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dgWifi);
-            this.Controls.Add(this.tboApiToken);
-            this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -338,9 +286,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tboApiToken;
         private System.Windows.Forms.DataGridView dgWifi;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label2;
@@ -355,10 +300,7 @@
         private System.Windows.Forms.TextBox tboZulipRealmURL;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tboZulipUser;
-        private System.Windows.Forms.TextBox tboZulipPassword;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnGetAPIkey;
         private System.Windows.Forms.CheckBox cboDefaultSendIP;
         private System.Windows.Forms.CheckBox cboUsewifi;
         private System.Windows.Forms.Button SSObtn;
