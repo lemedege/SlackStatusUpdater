@@ -14,6 +14,7 @@ using Label = System.Windows.Forms.Label;
 using TextBox = System.Windows.Forms.TextBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ComboBox = System.Windows.Forms.ComboBox;
+using System.Windows;
 
 namespace ZulipStatusUpdater
 {
@@ -190,6 +191,14 @@ namespace ZulipStatusUpdater
         private void SSO_1st_step_Click(object sender, EventArgs e)
         {             
             string realm = Classes.Tools.TidyUpURL(tboZulipRealmURL.Text);
+
+            System.Windows.MessageBox.Show(
+            "A browser window will open asking you to open zulip:// urls with ZulipStatusUpdater. Accept and login via Google. When finished, press the second button in the settings pane", "Signing in with Gooogle-SSO",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information,
+            MessageBoxResult.OK,
+            System.Windows.MessageBoxOptions.ServiceNotification);
+
             otp = ZulipStatusService.GoogleSSOLogin(realm);
         }
 
