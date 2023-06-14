@@ -50,7 +50,6 @@ namespace ZulipStatusUpdater
 
             // Bind other settings form controls to other settings fields.
             // Update data source as soon as data is changed on the form.
-            tboApiToken.DataBindings.Add("Text", _settings, "ZulipApikey", false, DataSourceUpdateMode.OnPropertyChanged);
             tboZulipRealmURL.DataBindings.Add("Text", _settings, "ZulipRealm", false, DataSourceUpdateMode.OnPropertyChanged);
             tboDefaultIcon.DataBindings.Add("Text", _settings.DefaultStatus, "Emoji", false, DataSourceUpdateMode.OnPropertyChanged);
             tboDefaultMessage.DataBindings.Add("Text", _settings.DefaultStatus, "Text", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -166,21 +165,6 @@ namespace ZulipStatusUpdater
         }
 
 
-        private void btnGetAPIkey_Click(object sender, EventArgs e)
-        {
-            SettingsManager.ApplySettings(_settings);
-
-            if (ZulipStatusService.GetZulipApiKey(tboZulipPassword.Text))
-            {
-                
-                tboApiToken.Text = SettingsManager.GetSettings().ZulipApikey;
-                tboZulipPassword.Clear();
-                // Save changes made to settings
-                //SettingsManager.ApplySettings(_settings);
-                //this.Dispose();
-            }
-            else tboZulipPassword.Clear();
-        }
 
         public string WindowTitle
         {
@@ -210,7 +194,6 @@ namespace ZulipStatusUpdater
             var settings = SettingsManager.GetSettings();
             string apikey = ZulipStatusService.DecryptAPIkeySSO(settings.LastOTPEncryptedApiToken, otp);
             //Program.runicon.Say(apikey);
-            tboApiToken.Text = apikey;
             tboZulipUser.Text = settings.ZulipEmail;
         }
 
