@@ -59,9 +59,10 @@ namespace ZulipStatusUpdater
             tboZulipUser.DataBindings.Add("Text", _settings, "ZulipEmail", false, DataSourceUpdateMode.OnPropertyChanged);
             cboUsewifi.DataBindings.Add("Checked", _settings, "useWifi", false, DataSourceUpdateMode.OnPropertyChanged);
 
+            // does it only update IP on startup?
+            string localIP = NetworkCheck.GetCurrentIP();
 
             // Draw table with profile fields
-
             tableProfileFields.ColumnCount = 2;
             tableProfileFields.RowCount = 0;
             tableProfileFields.ColumnStyles.Add(new ColumnStyle(SizeType.Percent,10));
@@ -78,7 +79,9 @@ namespace ZulipStatusUpdater
                 switch (field.Type)
                 {
                     case ProfileField.FieldType.SHORT_TEXT:
-                        tableProfileFields.Controls.Add(new TextBox() { Dock = DockStyle.Fill, Text = field.Content, Tag = field.Id }, 1, tableProfileFields.RowCount - 1);
+                        bool nameIsIP = field.Name == "IP";
+                        TextBox tbox = new TextBox() { Dock = DockStyle.Fill, Text = field.Content, Tag = field.Id, Enabled = !nameIsIP };
+                        tableProfileFields.Controls.Add(tbox, 1, tableProfileFields.RowCount - 1);
                         break;
                     case ProfileField.FieldType.LONG_TEXT:
                         break;
