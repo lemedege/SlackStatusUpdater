@@ -39,7 +39,6 @@ namespace ZulipStatusUpdater
 
             foreach (NetworkIdentifier ssid in NativeWifi.EnumerateAvailableNetworkSsids())
             {
-                //connectedSsids.Add(new String(ssid.ToString()));
                 connectedSsids.Add(ssid.ToString());
 
             }
