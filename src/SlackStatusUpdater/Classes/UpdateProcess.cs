@@ -114,7 +114,7 @@ namespace ZulipStatusUpdater
                 if (currentPresence != ActivityMonitor.ActivityState.OFFLINE)
                 {
                     //Program.runicon.Say(currentPresence.ToString());
-                    var succes = ZulipStatusService.SetZulipPresence(ActivityMonitor.ActivityState.IDLE);
+                    var succes = ZulipStatusService.SetZulipPresence(currentPresence);
                 }
             }
         }
