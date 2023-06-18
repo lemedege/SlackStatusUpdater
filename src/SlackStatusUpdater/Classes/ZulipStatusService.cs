@@ -71,7 +71,7 @@ namespace ZulipStatusUpdater
 
             var formData = new List<KeyValuePair<string, string>>() {
                 //new KeyValuePair<string, string>("status", presence.ToString().ToLower()),
-                new KeyValuePair<string, string>("status", "active"),
+                new KeyValuePair<string, string>("status", presence.ToString().ToLower()),
                 new KeyValuePair<string, string>("ping_only", "true"),
                 //new KeyValuePair<string, string>("new_user_input","true"),
                 //new KeyValuePair<string, string>("slim_presence","true")
