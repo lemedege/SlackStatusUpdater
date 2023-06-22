@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Timer = System.Timers.Timer;
 using ZulipStatusUpdater.Classes;
 using System.Data.SqlTypes;
+using System.Linq.Expressions;
 
 namespace ZulipStatusUpdater
 {
@@ -61,7 +62,6 @@ namespace ZulipStatusUpdater
         {
             string localIP = NetworkCheck.GetCurrentIP();
 
-            ZulipStatusService.GetCustomProfileFields();
             if (!SettingsManager.GetSettings().disableStatusUpdate)
             {
                 var statusToSet = SettingsManager.GetSettings().DefaultStatus;
@@ -90,15 +90,21 @@ namespace ZulipStatusUpdater
 
             // Update IP
             List<ProfileField> fields = ZulipStatusService.GetCustomProfileFields();
-            List<ProfileField>  filled_fields = ZulipStatusService.FillCustomProfileFields(fields);
-            ProfileField field = filled_fields.Where(item => item.Name == "IP").First();
-
-            if (field.Content != localIP)
+            if (fields.Count > 0)
             {
-                field.Content = localIP;
-                ZulipStatusService.UpdateProfileOnServer(field);
-            }
+                List<ProfileField> filled_fields = ZulipStatusService.FillCustomProfileFields(fields);
+                try
+                {
+                    ProfileField field = filled_fields.Where(item => item.Name == "IP").First();
 
+                    if (field.Content != localIP)
+                    {
+                        field.Content = localIP;
+                        ZulipStatusService.UpdateProfileOnServer(field);
+                    }
+                }
+                catch { }
+            }
             // Check presence
             ActivityMonitor.ActivityState currentPresence = ActivityMonitor.GetPresenceUpdate();
             //Program.runicon.Say(((int)currentPresence).ToString());
