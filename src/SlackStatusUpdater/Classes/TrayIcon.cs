@@ -116,6 +116,7 @@ namespace ZulipStatusUpdater
         {
             var settings = SettingsManager.GetSettings();
             settings.disableStatusUpdate = DisableMenuItem.Checked;
+            settings.disablePresenceUpdate = DisableMenuItem.Checked;
             SettingsManager.ApplySettings(settings);
             Say("Updates "+(SettingsManager.GetSettings().disableStatusUpdate ? "disabled": "enabled"));
         }
