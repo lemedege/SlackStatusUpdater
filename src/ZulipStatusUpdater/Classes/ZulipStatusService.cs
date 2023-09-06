@@ -360,7 +360,7 @@ namespace ZulipStatusUpdater
 
         public static bool CheckServerStatus()
         {
-            IRestResponse resp = ZulipRequest("/api/v1/server_settings", Method.GET);
+            IRestResponse resp = ZulipRequest("/api/v1/users/me", Method.GET);
 
             if (resp.StatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -443,11 +443,18 @@ namespace ZulipStatusUpdater
 
         public static string DecryptAPIkeySSO(string encryptedAPIkey, byte[] otp)
         {
-            byte[] array = Tools.StringToByteArray(encryptedAPIkey);
-            byte[] xored = Tools.exclusiveOR(otp, array);
-            string APIkey = System.Text.Encoding.ASCII.GetString(xored);
+            string APIkey = "";
+            try {
+                byte[] array = Tools.StringToByteArray(encryptedAPIkey);
+                byte[] xored = Tools.exclusiveOR(otp, array);
+                APIkey = System.Text.Encoding.ASCII.GetString(xored);
+            }
+            catch
+            {
+                Program.runicon.Say("Authentication failed");
+            }
             return APIkey;
-        }
+           }
 
     }
 }
