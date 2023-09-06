@@ -26,6 +26,8 @@ namespace ZulipStatusUpdater
         private ToolStripMenuItem DisableMenuItem;
         private ToolStripMenuItem CloseMenuItem;
 
+        string last_balloon_text = "";
+
         public RunIcon()
         {
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
@@ -125,11 +127,15 @@ namespace ZulipStatusUpdater
 
         public void Say(string text, ToolTipIcon icon = ToolTipIcon.Info)
         {
-            int timeout = 3;
-            TrayIcon.BalloonTipIcon = icon;
-            TrayIcon.BalloonTipText = text;
-            //TrayIcon.BalloonTipTitle = title;
-            TrayIcon.ShowBalloonTip(timeout);
+            if (text != last_balloon_text)
+            {
+                last_balloon_text = text;
+                int timeout = 3;
+                TrayIcon.BalloonTipIcon = icon;
+                TrayIcon.BalloonTipText = text;
+                //TrayIcon.BalloonTipTitle = title;
+                TrayIcon.ShowBalloonTip(timeout);
+            }
         }
 
         public void SetIconHoverText(string text)
