@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace ZulipStatusUpdater.Models
 {
     /// <summary>
-    /// Slack status
+    /// Zulip status
     /// </summary>
     public class ZulipStatus
     {

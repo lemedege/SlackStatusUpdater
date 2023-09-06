@@ -100,14 +100,14 @@ namespace ZulipStatusUpdater
                 {
                     new StatusProfile()
                     {
-                        WifiName = "HOME_WIFI",
+                        //WifiName = "HOME_WIFI",
                         networkip = "192.168.145.0/24",
                         Emoji = "house",
                         Text = "At home"
                     },
                     new StatusProfile()
                     {
-                        WifiName = "OFFICE_WIFI",
+                        //WifiName = "OFFICE_WIFI",
                         networkip = "192.168.111.0/24",
                         Emoji = "computer",
                         Text = "At the office"

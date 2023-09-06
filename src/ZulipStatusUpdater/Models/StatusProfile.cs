@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace ZulipStatusUpdater.Models
 {
+
     /// <summary>
     /// Slack status profile for a specific wifi
     /// </summary>
+    
     public class StatusProfile
     {
-        [XmlElement("wifi-name")]
-        public string WifiName { get; set; }
+
+        //[XmlElement("wifi-name")]
+        //public string WifiName { get; set; }
 
         [XmlElement("network-ip")]
         public string networkip { get; set; }

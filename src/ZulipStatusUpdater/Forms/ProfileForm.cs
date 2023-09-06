@@ -47,6 +47,9 @@ namespace ZulipStatusUpdater.Forms
         Label defaultStatusLabel = new Label();
         CheckBox enableDefaultStatus = new CheckBox();
 
+        ToolStripStatusLabel ConnectionStatusTsIcon = new ToolStripStatusLabel();
+        ToolStripStatusLabel ConnectionStatusTsLabel = new ToolStripStatusLabel();
+
         // Singleton instance field
         private static ProfileForm _instance;
         Settings _settings;
@@ -82,6 +85,8 @@ namespace ZulipStatusUpdater.Forms
             BuildDefaultStatusTable();
             BuildLoginInfoTable();
             BuildSettingsTable();
+
+            statusStrip1.Items.Add(ConnectionStatusTsLabel);
 
         }
 
@@ -146,6 +151,9 @@ namespace ZulipStatusUpdater.Forms
             send_ip_cbox.Text = "Share IP adress";
             send_ip_cbox.AutoSize = true;
 
+
+            IdleTimeNum.Maximum = 200000;
+            IdleTimeNum.Minimum = 2000;
             IdleTimeLabel.Text = "Idle timeout";
             FlowLayoutPanel idleTimePanel = new FlowLayoutPanel();
             idleTimePanel.FlowDirection = FlowDirection.LeftToRight;
@@ -160,6 +168,7 @@ namespace ZulipStatusUpdater.Forms
             SettingsTable.Controls.Add(idleTimePanel, 0, -1);
 
             run_at_startup_cbox.DataBindings.Add("Checked", _settings, "AutoStart", false, DataSourceUpdateMode.OnPropertyChanged);
+            IdleTimeNum.DataBindings.Add("Value", _settings, "idleThreshold", false, DataSourceUpdateMode.OnPropertyChanged);
 
         }
 
@@ -373,5 +382,9 @@ namespace ZulipStatusUpdater.Forms
             UpdateConnectionLabel(null, null);
         }
 
+        private void ProfileForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

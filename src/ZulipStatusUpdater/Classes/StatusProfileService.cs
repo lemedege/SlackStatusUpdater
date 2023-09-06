@@ -20,7 +20,7 @@ namespace ZulipStatusUpdater
         /// <returns>ZulipStatus to be set</returns>
         public static ZulipStatus GetStatusWifi(List<string> wifiNames)
         {
-            var settings = SettingsManager.GetSettings();
+            /*var settings = SettingsManager.GetSettings();
 
             ZulipStatus status = settings.DefaultStatus;
 
@@ -30,7 +30,8 @@ namespace ZulipStatusUpdater
                     status = profile.Status;
             }
 
-            return status;
+            */
+            return new ZulipStatus();
         }
 
         /// <summary>
