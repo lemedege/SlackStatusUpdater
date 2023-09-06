@@ -70,7 +70,7 @@ namespace ZulipStatusUpdater.Models
         public bool AutoStart { get; set; }
 
         [XmlElement("default-status")]
-        public Status DefaultStatus { get; set; }
+        public ZulipStatus DefaultStatus { get; set; }
 
         [XmlElement("wifi-config")]
         public List<StatusProfile> StatusProfiles { get; set; }

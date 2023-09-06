@@ -26,6 +26,9 @@ namespace ZulipStatusUpdater.Forms
 
         CheckBox run_at_startup_cbox = new CheckBox();
         CheckBox send_ip_cbox = new CheckBox();
+        Label IdleTimeLabel = new Label();
+        NumericUpDown IdleTimeNum = new NumericUpDown();
+        NumericUpDown OfflineTimeNum = new NumericUpDown();
 
         TextBox realmTb = new TextBox();
         Label realmLabel = new Label();
@@ -143,10 +146,19 @@ namespace ZulipStatusUpdater.Forms
             send_ip_cbox.Text = "Share IP adress";
             send_ip_cbox.AutoSize = true;
 
-            SettingsTable.Controls.Add(run_at_startup_cbox, 0, 0);
-            SettingsTable.Controls.Add(send_ip_cbox, 0, -1);
+            IdleTimeLabel.Text = "Idle timeout";
+            FlowLayoutPanel idleTimePanel = new FlowLayoutPanel();
+            idleTimePanel.FlowDirection = FlowDirection.LeftToRight;
+            idleTimePanel.AutoSize = true;
+            idleTimePanel.Controls.Add(IdleTimeNum);
+            idleTimePanel.Controls.Add(IdleTimeLabel);
+            
 
-            send_ip_cbox.DataBindings.Add("Checked", _settings.DefaultStatus, "SendIP", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            SettingsTable.Controls.Add(run_at_startup_cbox, 0, 0);
+            //SettingsTable.Controls.Add(send_ip_cbox, 0, -1);
+            SettingsTable.Controls.Add(idleTimePanel, 0, -1);
+
             run_at_startup_cbox.DataBindings.Add("Checked", _settings, "AutoStart", false, DataSourceUpdateMode.OnPropertyChanged);
 
         }

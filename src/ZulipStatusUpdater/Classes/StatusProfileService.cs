@@ -17,12 +17,12 @@ namespace ZulipStatusUpdater
         /// Return the status to set based on the list of connected wifis
         /// </summary>
         /// <param name="wifiNames">List of connected wifis</param>
-        /// <returns>Status to be set</returns>
-        public static Status GetStatusWifi(List<string> wifiNames)
+        /// <returns>ZulipStatus to be set</returns>
+        public static ZulipStatus GetStatusWifi(List<string> wifiNames)
         {
             var settings = SettingsManager.GetSettings();
 
-            Status status = settings.DefaultStatus;
+            ZulipStatus status = settings.DefaultStatus;
 
             foreach (StatusProfile profile in settings.StatusProfiles)
             {
@@ -37,12 +37,12 @@ namespace ZulipStatusUpdater
         /// Return the status to set based on the current local IP
         /// </summary>
         /// <param name="localIP">Current local IP</param>
-        /// <returns>Status to be set</returns>
-        public static Status GetStatusIP(string localip)
+        /// <returns>ZulipStatus to be set</returns>
+        public static ZulipStatus GetStatusIP(string localip)
         {
             var settings = SettingsManager.GetSettings();
 
-            Status status = settings.DefaultStatus;
+            ZulipStatus status = settings.DefaultStatus;
 
             var cur_ip = IPAddressRange.Parse(localip);
             foreach (StatusProfile profile in settings.StatusProfiles)

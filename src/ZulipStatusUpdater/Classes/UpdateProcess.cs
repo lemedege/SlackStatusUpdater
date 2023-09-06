@@ -25,7 +25,7 @@ namespace ZulipStatusUpdater
     {
         private static System.Timers.Timer _timer;
 
-        private static Status _previousStatus;
+        private static ZulipStatus _previousStatus;
 
         private static string _previousIP;
 

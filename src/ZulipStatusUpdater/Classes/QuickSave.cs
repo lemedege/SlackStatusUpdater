@@ -31,7 +31,7 @@ namespace ZulipStatusUpdater
 
         //        if (matchingProfile != null)
         //        {
-        //            matchingProfile.Status = currentStatus;
+        //            matchingProfile.ZulipStatus = currentStatus;
         //        }
         //        else
         //        {
@@ -39,7 +39,7 @@ namespace ZulipStatusUpdater
         //                new StatusProfile()
         //                {
         //                    WifiName = wifi,
-        //                    Status = currentStatus
+        //                    ZulipStatus = currentStatus
         //                }
         //                );
         //        }

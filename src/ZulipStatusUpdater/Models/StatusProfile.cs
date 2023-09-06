@@ -22,26 +22,22 @@ namespace ZulipStatusUpdater.Models
         [XmlElement("emoji")]
         public string Emoji { get; set; }
 
-        [XmlElement("send_ip")]
-        public bool SendIP { get; set; }
-
         [XmlElement("text")]
         public string Text { get; set; }
 
         /// <summary>
-        /// Status property constructed from Emoji and Text properties. Nonbrowsable, so it doesn't
+        /// ZulipStatus property constructed from Emoji and Text properties. Nonbrowsable, so it doesn't
         /// get rendered in the bound datagridview in settings form.
         /// </summary>
         [Browsable(false)]
-        public Status Status
+        public ZulipStatus Status
         {
             get
             {
-                return new Status()
+                return new ZulipStatus()
                 {
                     Emoji = this.Emoji,
                     Text = this.Text,
-                    SendIP = this.SendIP
                 };
             }
 
@@ -49,7 +45,6 @@ namespace ZulipStatusUpdater.Models
             {
                 this.Emoji = value.Emoji;
                 this.Text = value.Text;
-                this.SendIP = value.SendIP;
             }
         }
 

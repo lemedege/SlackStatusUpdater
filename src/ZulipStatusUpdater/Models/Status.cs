@@ -10,7 +10,7 @@ namespace ZulipStatusUpdater.Models
     /// <summary>
     /// Slack status
     /// </summary>
-    public class Status
+    public class ZulipStatus
     {
         [XmlElement("emoji")]
         public string Emoji { get; set; }
@@ -19,10 +19,6 @@ namespace ZulipStatusUpdater.Models
         public string Text { get; set; }
 
 
-
-        [XmlElement("send_ip")]
-        public bool SendIP { get; set; }
-        
 
         /// <summary>
         /// Overriden method for checking equality between statuses.
@@ -39,7 +35,7 @@ namespace ZulipStatusUpdater.Models
             else
             {
                 // Statuses are equal if emoji and text are equal
-                Status s = (Status)obj;
+                ZulipStatus s = (ZulipStatus)obj;
                 return (Emoji == s.Emoji) && (Text == s.Text);
             }
         }

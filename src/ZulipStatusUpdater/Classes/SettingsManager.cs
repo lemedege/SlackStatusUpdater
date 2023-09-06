@@ -91,11 +91,10 @@ namespace ZulipStatusUpdater
         {
             var defaultSettings = new Settings()
             {
-                DefaultStatus = new Status()
+                DefaultStatus = new ZulipStatus()
                 {
-                    Emoji = "house",
+                    Emoji = "www",
                     Text = "Working remotely",
-                    SendIP = false,
                 },
                 StatusProfiles = new List<StatusProfile>()
                 {
@@ -104,7 +103,6 @@ namespace ZulipStatusUpdater
                         WifiName = "HOME_WIFI",
                         networkip = "192.168.145.0/24",
                         Emoji = "house",
-                        SendIP = false,
                         Text = "At home"
                     },
                     new StatusProfile()
@@ -112,7 +110,6 @@ namespace ZulipStatusUpdater
                         WifiName = "OFFICE_WIFI",
                         networkip = "192.168.111.0/24",
                         Emoji = "computer",
-                        SendIP = false,
                         Text = "At the office"
                     }
                 }

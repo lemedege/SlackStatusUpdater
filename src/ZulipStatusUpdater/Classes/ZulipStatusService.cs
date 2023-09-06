@@ -18,7 +18,7 @@ using ZulipStatusUpdater.Classes;
 using System.Collections;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Web.UI.WebControls;
-using Status = ZulipStatusUpdater.Models.Status;
+using ZulipStatus = ZulipStatusUpdater.Models.ZulipStatus;
 using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
 using RestSharp.Serialization.Json;
@@ -36,14 +36,14 @@ namespace ZulipStatusUpdater
         /// <summary>
         /// Set zulip status with the API
         /// </summary>
-        /// <param name="status">Status to set</param>
-        /// <returns>Status setting success</returns>
-        public static bool SetZulipStatus(Status status, string localIP)
+        /// <param name="status">ZulipStatus to set</param>
+        /// <returns>ZulipStatus setting success</returns>
+        public static bool SetZulipStatus(ZulipStatus status, string localIP)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
             var formData = new List<KeyValuePair<string, string>>() {
-                new KeyValuePair<string, string>("status_text", (status.SendIP ? status.Text +" "+  localIP: (status.Text?? "").ToString())),
+                new KeyValuePair<string, string>("status_text", (status.Text?? "").ToString()),
                 new KeyValuePair<string, string>("emoji_name", status.Emoji),
                 /*new KeyValuePair<string, string>("emoji_code", "1f697"),*/
                 /*new KeyValuePair<string, string>("reaction_type", "unicode_emoji"),*/
@@ -110,7 +110,7 @@ namespace ZulipStatusUpdater
         /// Get zulip status from the API
         /// </summary>
         /// <returns>The current slack status</returns>
-        public static Status GetZulipStatus()
+        public static ZulipStatus GetZulipStatus()
         {
 
 
@@ -145,11 +145,11 @@ namespace ZulipStatusUpdater
             string emoji = content["profile"]["status_emoji"] ?? "";
             string text = content["profile"]["status_text"] ?? "";
 
-            var status = new Status() { Text = text, Emoji = emoji };
+            var status = new ZulipStatus() { Text = text, Emoji = emoji };
 
             return status;
             */
-            var status = new Status() { };
+            var status = new ZulipStatus() { };
 
             return status;
         }
