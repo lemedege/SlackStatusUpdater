@@ -51,6 +51,7 @@ namespace ZulipStatusUpdater.Forms
         public ProfileForm()
         {
             InitializeComponent();
+            this.Text = WindowTitle;
 
             ConnectionTimer.Tick += new EventHandler(UpdateConnectionLabel);
             UpdateConnectionLabel(null,null); //fire the timer to update label on startup
@@ -348,11 +349,14 @@ namespace ZulipStatusUpdater.Forms
 
         private void SSO_2nd_step_Click(object sender, EventArgs e)
         {
-            var settings = SettingsManager.GetSettings();
-            string apikey = ZulipStatusService.DecryptAPIkeySSO(settings.LastOTPEncryptedApiToken, otp);
+            _settings = SettingsManager.GetSettings();
+            string apikey = ZulipStatusService.DecryptAPIkeySSO(_settings.LastOTPEncryptedApiToken, otp);
+            _settings.ZulipApikey = apikey;
+            _settings.ZulipRealm = Classes.Tools.TidyUpURL(realmTb.Text);
+            emailTb.Text = _settings.ZulipEmail;
             //Program.runicon.Say(apikey);
-            //this.emailtb.Text = settings.ZulipEmail;
-            emailTb.Text = settings.ZulipEmail;
+            SettingsManager.ApplySettings(_settings);
+            UpdateConnectionLabel(null, null);
         }
 
     }
