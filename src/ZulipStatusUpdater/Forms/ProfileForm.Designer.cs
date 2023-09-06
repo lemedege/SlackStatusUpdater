@@ -31,26 +31,30 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileForm));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.ProfileTab = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgWifi = new System.Windows.Forms.DataGridView();
+            this.defaultStatusTable = new System.Windows.Forms.TableLayoutPanel();
+            this.tableProfileFields = new System.Windows.Forms.TableLayoutPanel();
             this.LoginTab = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.SettingsTable = new System.Windows.Forms.TableLayoutPanel();
             this.LoginInfoTable = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ConnectionStatusTsLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SettingsTable = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableProfileFields = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.dgWifi = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.defaultStatusTable = new System.Windows.Forms.TableLayoutPanel();
+            this.tableProfile = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl.SuspendLayout();
             this.ProfileTab.SuspendLayout();
-            this.LoginTab.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgWifi)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgWifi)).BeginInit();
+            this.LoginTab.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.tableProfile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -75,6 +79,78 @@
             this.ProfileTab.Text = "Profile";
             this.ProfileTab.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.tableProfile, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(786, 378);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.dgWifi, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.defaultStatusTable, 0, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(396, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(387, 372);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // dgWifi
+            // 
+            this.dgWifi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgWifi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgWifi.Location = new System.Drawing.Point(3, 3);
+            this.dgWifi.Name = "dgWifi";
+            this.dgWifi.Size = new System.Drawing.Size(381, 153);
+            this.dgWifi.TabIndex = 29;
+            // 
+            // defaultStatusTable
+            // 
+            this.defaultStatusTable.AutoSize = true;
+            this.defaultStatusTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.defaultStatusTable.ColumnCount = 2;
+            this.defaultStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.defaultStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.defaultStatusTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.defaultStatusTable.Location = new System.Drawing.Point(3, 366);
+            this.defaultStatusTable.Name = "defaultStatusTable";
+            this.defaultStatusTable.RowCount = 2;
+            this.defaultStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.defaultStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.defaultStatusTable.Size = new System.Drawing.Size(381, 3);
+            this.defaultStatusTable.TabIndex = 30;
+            // 
+            // tableProfileFields
+            // 
+            this.tableProfileFields.AutoScroll = true;
+            this.tableProfileFields.ColumnCount = 2;
+            this.tableProfileFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableProfileFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableProfileFields.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableProfileFields.Location = new System.Drawing.Point(3, 123);
+            this.tableProfileFields.Name = "tableProfileFields";
+            this.tableProfileFields.RowCount = 2;
+            this.tableProfileFields.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableProfileFields.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableProfileFields.Size = new System.Drawing.Size(381, 372);
+            this.tableProfileFields.TabIndex = 28;
+            // 
             // LoginTab
             // 
             this.LoginTab.Controls.Add(this.tableLayoutPanel1);
@@ -85,6 +161,40 @@
             this.LoginTab.TabIndex = 1;
             this.LoginTab.Text = "Login";
             this.LoginTab.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.SettingsTable, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.LoginInfoTable, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(786, 378);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // SettingsTable
+            // 
+            this.SettingsTable.AutoSize = true;
+            this.SettingsTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SettingsTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.SettingsTable.ColumnCount = 1;
+            this.SettingsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SettingsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SettingsTable.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SettingsTable.Location = new System.Drawing.Point(396, 3);
+            this.SettingsTable.Name = "SettingsTable";
+            this.SettingsTable.Padding = new System.Windows.Forms.Padding(10);
+            this.SettingsTable.RowCount = 2;
+            this.SettingsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SettingsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SettingsTable.Size = new System.Drawing.Size(387, 23);
+            this.SettingsTable.TabIndex = 0;
             // 
             // LoginInfoTable
             // 
@@ -123,71 +233,6 @@
             this.ConnectionStatusTsLabel.Size = new System.Drawing.Size(16, 17);
             this.ConnectionStatusTsLabel.Text = "...";
             // 
-            // SettingsTable
-            // 
-            this.SettingsTable.AutoSize = true;
-            this.SettingsTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.SettingsTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.SettingsTable.ColumnCount = 1;
-            this.SettingsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SettingsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SettingsTable.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SettingsTable.Location = new System.Drawing.Point(396, 3);
-            this.SettingsTable.Name = "SettingsTable";
-            this.SettingsTable.Padding = new System.Windows.Forms.Padding(10);
-            this.SettingsTable.RowCount = 2;
-            this.SettingsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SettingsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SettingsTable.Size = new System.Drawing.Size(387, 23);
-            this.SettingsTable.TabIndex = 0;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.SettingsTable, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.LoginInfoTable, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(786, 378);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableProfileFields, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(786, 378);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // tableProfileFields
-            // 
-            this.tableProfileFields.AutoScroll = true;
-            this.tableProfileFields.ColumnCount = 2;
-            this.tableProfileFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableProfileFields.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableProfileFields.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableProfileFields.Location = new System.Drawing.Point(3, 3);
-            this.tableProfileFields.Name = "tableProfileFields";
-            this.tableProfileFields.RowCount = 2;
-            this.tableProfileFields.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableProfileFields.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableProfileFields.Size = new System.Drawing.Size(387, 372);
-            this.tableProfileFields.TabIndex = 28;
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
@@ -198,46 +243,29 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(800, 0);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
-            // dgWifi
+            // tableProfile
             // 
-            this.dgWifi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgWifi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgWifi.Location = new System.Drawing.Point(3, 3);
-            this.dgWifi.Name = "dgWifi";
-            this.dgWifi.Size = new System.Drawing.Size(381, 153);
-            this.dgWifi.TabIndex = 29;
+            this.tableProfile.ColumnCount = 1;
+            this.tableProfile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableProfile.Controls.Add(this.tableProfileFields, 0, 1);
+            this.tableProfile.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableProfile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableProfile.Location = new System.Drawing.Point(3, 3);
+            this.tableProfile.Name = "tableProfile";
+            this.tableProfile.RowCount = 2;
+            this.tableProfile.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableProfile.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableProfile.Size = new System.Drawing.Size(387, 372);
+            this.tableProfile.TabIndex = 0;
             // 
-            // tableLayoutPanel3
+            // pictureBox1
             // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.dgWifi, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.defaultStatusTable, 0, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(396, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(387, 372);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // defaultStatusTable
-            // 
-            this.defaultStatusTable.AutoSize = true;
-            this.defaultStatusTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.defaultStatusTable.ColumnCount = 2;
-            this.defaultStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.defaultStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.defaultStatusTable.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.defaultStatusTable.Location = new System.Drawing.Point(3, 366);
-            this.defaultStatusTable.Name = "defaultStatusTable";
-            this.defaultStatusTable.RowCount = 2;
-            this.defaultStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.defaultStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.defaultStatusTable.Size = new System.Drawing.Size(381, 3);
-            this.defaultStatusTable.TabIndex = 30;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(133, 114);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // ProfileForm
             // 
@@ -253,15 +281,17 @@
             this.Text = "Form1";
             this.tabControl.ResumeLayout(false);
             this.ProfileTab.ResumeLayout(false);
-            this.LoginTab.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgWifi)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgWifi)).EndInit();
+            this.LoginTab.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.tableProfile.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +313,7 @@
         private System.Windows.Forms.DataGridView dgWifi;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel defaultStatusTable;
+        private System.Windows.Forms.TableLayoutPanel tableProfile;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

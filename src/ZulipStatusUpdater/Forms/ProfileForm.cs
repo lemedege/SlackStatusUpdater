@@ -71,6 +71,8 @@ namespace ZulipStatusUpdater.Forms
             dgWifi.DataSource = bs;
 
 
+            //pictureBox1.Image = ZulipStatusService.GetProfilePicture();
+            //pictureBox1.Load();
 
             BuildBottomButtons();
             BuildProfileFields();

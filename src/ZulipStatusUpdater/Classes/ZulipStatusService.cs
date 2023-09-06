@@ -23,6 +23,7 @@ using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
 using RestSharp.Serialization.Json;
 using System.Xml.Linq;
+using System.Security.Policy;
 
 
 namespace ZulipStatusUpdater
@@ -389,6 +390,30 @@ namespace ZulipStatusUpdater
                 return false;
             }
         }
+
+        public static System.Drawing.Image GetProfilePicture()
+        {
+            IRestResponse resp = ZulipRequest("/api/v1/users/me", Method.GET);
+
+            if (resp.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                return null;
+            }
+            
+                //JObject o = JObject.Parse(resp.Content);
+                //$.result            
+            string profile_picture_url = JObject.Parse(resp.Content).SelectToken("$.avatar_url").ToString();
+
+            using (System.Net.WebClient webClient = new System.Net.WebClient())
+            {
+                using (System.IO.Stream stream = webClient.OpenRead(profile_picture_url))
+                {
+                    return System.Drawing.Image.FromStream(stream);
+                }
+            }
+
+        }
+
 
         private static IRestResponse ZulipRequest(string endpoint, RestSharp.Method METHOD)
         {
