@@ -13,8 +13,6 @@ namespace ZulipStatusUpdater
     public static class Constants
     {
         public static readonly string NAME_OF_APP = "ZulipStatusUpdater";
-
-
     }
     static class Program
     {
@@ -31,11 +29,13 @@ namespace ZulipStatusUpdater
             // Register URI scheme so that zulip:// URIs will be opened by ZulipStatusUpdater
             Tools.RegisterURLProtocol("zulip", Assembly.GetExecutingAssembly().Location);
 
-            if(args.Length > 0)
+
+            //If arguments is passed we asume that the encrypted OPT key is passed from browser redirect
+            if (args.Length > 0)
             {
                 var url = new Uri(args[0]);
-                String access_token = HttpUtility.ParseQueryString(url.Query).Get("otp_encrypted_api_key");
-                String email = HttpUtility.ParseQueryString(url.Query).Get("email");
+                string access_token = HttpUtility.ParseQueryString(url.Query).Get("otp_encrypted_api_key");
+                string email = HttpUtility.ParseQueryString(url.Query).Get("email");
                 var settings = SettingsManager.GetSettings();
                 settings.LastOTPEncryptedApiToken = access_token;
                 settings.ZulipEmail = email;
@@ -43,14 +43,12 @@ namespace ZulipStatusUpdater
                 Application.Exit();
                 return;
             }
-            
+
             // Start automatic status updates process
             runicon = new RunIcon();
             UpdateProcess.Start();
             // Make sure the application runs!
             Application.Run(Program.runicon);
-
-
         }
     }
 }

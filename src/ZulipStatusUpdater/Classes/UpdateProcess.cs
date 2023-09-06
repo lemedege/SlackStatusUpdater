@@ -14,6 +14,7 @@ using Timer = System.Timers.Timer;
 using ZulipStatusUpdater.Classes;
 using System.Data.SqlTypes;
 using System.Linq.Expressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ZulipStatusUpdater
 {
@@ -60,6 +61,8 @@ namespace ZulipStatusUpdater
         /// </summary>
         public static void Execute()
         {
+            Program.runicon.SetIconHoverText(ZulipStatusService.CheckServerStatus()? "Connected" : "Not connected");
+
             string localIP = NetworkCheck.GetCurrentIP();
 
             if (!SettingsManager.GetSettings().disableStatusUpdate)

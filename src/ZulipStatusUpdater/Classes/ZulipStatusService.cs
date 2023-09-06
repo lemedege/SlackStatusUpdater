@@ -49,7 +49,7 @@ namespace ZulipStatusUpdater
             };
 
 
-            var client = new RestClient(SettingsManager.GetSettings().ZulipRealm +"/api/v1/users/me/status");
+            var client = new RestClient(SettingsManager.GetSettings().ZulipRealm + "/api/v1/users/me/status");
             client.Authenticator = new HttpBasicAuthenticator(SettingsManager.GetSettings().ZulipEmail, SettingsManager.GetSettings().ZulipApikey);
 
             var request = new RestRequest(Method.POST);
@@ -137,7 +137,7 @@ namespace ZulipStatusUpdater
 
             return status;
             */
-            var status = new Status() {  };
+            var status = new Status() { };
 
             return status;
         }
@@ -173,7 +173,7 @@ namespace ZulipStatusUpdater
 
             var response = client.Execute(request);
 
-            
+
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 return false;
 
@@ -187,7 +187,7 @@ namespace ZulipStatusUpdater
 
             if (content["result"] == "success") return true;
             else return false;
-            
+
 
         }
 
@@ -216,17 +216,17 @@ namespace ZulipStatusUpdater
             dynamic content = Newtonsoft.Json.Linq.JObject.Parse(response.Content);
             foreach (var field in content.emoji)
             {
-                foreach(var emoji in field)
+                foreach (var emoji in field)
                 {
-                    if(emoji.deactivated == "false")
+                    if (emoji.deactivated == "false")
                     {
                         ListOfRealmEmojis.Add((string)emoji.name);
-                        
+
                     }
                 }
             }
             if (content["result"] == "success") return ListOfRealmEmojis;
-           else return new List<string>(0);
+            else return new List<string>(0);
 
 
         }
@@ -257,7 +257,7 @@ namespace ZulipStatusUpdater
             CustomFields custom_fields = JsonConvert.DeserializeObject<CustomFields>(response.Content);
             // Automatic deserialization is not working for the FieldData content of the response. 
             // This loops implements getting options for a combobox
-            foreach(ProfileField list_of_options in custom_fields.ProfileFields.Where(field => field.Type == ProfileField.FieldType.LIST_OF_OPTIONS))
+            foreach (ProfileField list_of_options in custom_fields.ProfileFields.Where(field => field.Type == ProfileField.FieldType.LIST_OF_OPTIONS))
             {
                 List<FieldDataContent> fieldDataContents = new List<FieldDataContent>();
                 JObject list_options_content = JObject.Parse(list_of_options.FieldData_str);
@@ -304,10 +304,10 @@ namespace ZulipStatusUpdater
             {
                 bool containsItem = list_to_fill.Any(item => item.Id == int.Parse(fields.Name));
                 string name = fields.Name;
-                string value = fields.Value["value"].ToString();   
+                string value = fields.Value["value"].ToString();
                 if (containsItem)
                 {
-                    list_to_fill.First(item => item.Id == int.Parse(fields.Name)).Content = value; 
+                    list_to_fill.First(item => item.Id == int.Parse(fields.Name)).Content = value;
                 }
             }
             //List<ProfileField> SortedList = ListOfProfileFields.OrderBy(o => o.order).ToList();
@@ -340,7 +340,7 @@ namespace ZulipStatusUpdater
             );
 
             request.AddParameter("data", json);
-            
+
             var response = client.Execute(request);
 
 
@@ -358,7 +358,41 @@ namespace ZulipStatusUpdater
         }
 
 
+        public static bool CheckServerStatus()
+        {
+            IRestResponse resp = ZulipRequest("/api/v1/server_settings", Method.GET);
 
+            if (resp.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                return false;
+            }
+
+            //JObject o = JObject.Parse(resp.Content);
+            //$.result            
+            if (JObject.Parse(resp.Content).SelectToken("$.result").ToString() == "success")
+            { 
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static IRestResponse ZulipRequest(string endpoint, RestSharp.Method METHOD)
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
+            var username = SettingsManager.GetSettings().ZulipEmail;
+
+            var client = new RestClient(SettingsManager.GetSettings().ZulipRealm + endpoint);
+            client.UserAgent = "ZulipStatusUpdater";
+
+            client.Authenticator = new HttpBasicAuthenticator(SettingsManager.GetSettings().ZulipEmail, SettingsManager.GetSettings().ZulipApikey);
+            var request = new RestRequest(METHOD);
+            var response = client.Execute(request);
+            return response;
+        }
 
 
 
@@ -381,17 +415,18 @@ namespace ZulipStatusUpdater
         //
         // The solution here is a hack using the mobile otp endpoint. 
         // ZsU registers as available for zulip:// URI. 
-        // GoogleSSOLogin() creates the secret and opens a browser window where the user can authenticate using google SSO
+        // InitializeSSOLogin() creates the secret and opens a browser window where the user can authenticate using google SSO
         // When the page is redirected to zulip://... with the authentication token, a new instance of ZsU is launched capturing 
         // the (encrypted) token, saving it to the settingsfile and killing it self. 
         // Then DecryptAPIkeySSO can be called using the saved auth token and secret. 
 
-        public static byte[] GoogleSSOLogin(string realm) {
+        public static byte[] InitializeSSOLogin(string realm)
+        {
 
             var randomGenerator = System.Security.Cryptography.RandomNumberGenerator.Create();
 
             byte[] randomBytes = new byte[32];
-            randomGenerator.GetBytes(randomBytes,0,32);
+            randomGenerator.GetBytes(randomBytes, 0, 32);
 
             string randomString = BitConverter.ToString(randomBytes).Replace("-", "");
 

@@ -9,6 +9,7 @@ using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Forms.Application;
 using System.Runtime.CompilerServices;
+using ZulipStatusUpdater.Forms;
 
 namespace ZulipStatusUpdater
 {
@@ -17,6 +18,7 @@ namespace ZulipStatusUpdater
     {
         // Private field for the settings form to help ensure only one instance of it is opened
         private static SettingsForm _settingsForm;
+        private static ProfileForm _ProfileForm;
         //Component declarations
         public NotifyIcon TrayIcon;
         private ContextMenuStrip TrayIconContextMenu;
@@ -58,7 +60,7 @@ namespace ZulipStatusUpdater
             this.CloseMenuItem});
 
             this.TrayIconContextMenu.Name = "TrayIconContextMenu";
-           
+
             // 
             // SettingsMenuItem
             // 
@@ -100,16 +102,16 @@ namespace ZulipStatusUpdater
         private void TrayIcon_LeftClick(object sender, EventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
-            if(me.Button == MouseButtons.Left)
-            { 
-            Say("Force updating status");
-            UpdateProcess.Execute();
+            if (me.Button == MouseButtons.Left)
+            {
+                Say("Force updating status");
+                UpdateProcess.Execute();
             }
         }
 
         private void CloseMenuItem_Click(object sender, EventArgs e)
         {
-                Application.Exit();
+            Application.Exit();
         }
 
         private void DisableItem_Click(object sender, EventArgs e)
@@ -118,7 +120,7 @@ namespace ZulipStatusUpdater
             settings.disableStatusUpdate = DisableMenuItem.Checked;
             settings.disablePresenceUpdate = DisableMenuItem.Checked;
             SettingsManager.ApplySettings(settings);
-            Say("Updates "+(SettingsManager.GetSettings().disableStatusUpdate ? "disabled": "enabled"));
+            Say("Updates " + (SettingsManager.GetSettings().disableStatusUpdate ? "disabled" : "enabled"));
         }
 
         public void Say(string text, ToolTipIcon icon = ToolTipIcon.Info)
@@ -132,9 +134,7 @@ namespace ZulipStatusUpdater
 
         public void SetIconHoverText(string text)
         {
-         TrayIcon.Text = "text";
-
-
+            TrayIcon.Text = Constants.NAME_OF_APP + ": " + text;
         }
 
 
@@ -149,66 +149,12 @@ namespace ZulipStatusUpdater
             if (_settingsForm == null || _settingsForm.IsDisposed)
             {
                 // Open settings form
-                _settingsForm = SettingsForm.GetInstance;
-                _settingsForm.FormBorderStyle = FormBorderStyle.FixedDialog;
-                _settingsForm.ShowDialog();
-                _settingsForm.Dispose();
+                _ProfileForm = ProfileForm.GetInstance;
+                _ProfileForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                _ProfileForm.ShowDialog();
+                _ProfileForm.Dispose();
             }
         }
 
     }
-
-
-
-
-
-    /* /// <summary>
-     /// Disposable class for handling the system tray icon
-     /// </summary>
-     public class TrayIcon
-     {
-
-         /// <summary>
-         ///  System tray icon
-         /// </summary>
-         NotifyIcon ni;
-
-         /// <summary>
-         /// Constructor
-         /// </summary>
-         public TrayIcon()
-         {
-             // Initialize NotifyIcon
-             ni = new NotifyIcon();
-             ni.ContextMenuStrip = ContextMenuFactory.Create();
-             ni.Icon = Resources.zulipicon;
-             ni.Visible = true;
-             ni.Click += new System.EventHandler(NotifyIcon_Click);
-         }
-
-         /// <summary>
-         /// Dispose
-         /// </summary>
-         public void Dispose()
-         {
-             // Disappear the system tray icon as soon as the application exits
-             ni.Icon = null;
-             ni.Visible = false;
-             ni.Dispose();
-         }
-
-         public void NotifyIcon_Click(object sender, System.EventArgs e)
-         {
-             UpdateProcess.Execute();
-         }
-
-         public void Show_Ballon(string text)
-         {
-
-             int timeout = 3;
-             ToolTipIcon icon = new ToolTipIcon();
-             ni.ShowBalloonTip(timeout,text,text,icon);
-
-         }
-     }*/
 }

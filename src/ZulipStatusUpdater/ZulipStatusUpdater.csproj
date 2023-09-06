@@ -123,7 +123,6 @@
     <Compile Include="Classes\AutoStartManager.cs" />
     <Compile Include="Classes\ActivityMonitor.cs" />
     <Compile Include="Classes\Tools.cs" />
-    <Compile Include="Classes\ContextMenuFactory.cs" />
     <Compile Include="Classes\QuickSave.cs" />
     <Compile Include="Classes\ZulipStatusService.cs" />
     <Compile Include="Classes\TrayIcon.cs" />
@@ -148,7 +147,6 @@
     <Compile Include="Models\StatusProfile.cs" />
     <Compile Include="Classes\SettingsManager.cs" />
     <Compile Include="Classes\StatusProfileService.cs" />
-    <Compile Include="Classes\SlackStatusService.cs" />
     <Compile Include="Classes\UpdateProcess.cs" />
     <EmbeddedResource Include="Forms\ProfileForm.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>

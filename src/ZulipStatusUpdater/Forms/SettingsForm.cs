@@ -186,7 +186,7 @@ namespace ZulipStatusUpdater
             MessageBoxResult.OK,
             System.Windows.MessageBoxOptions.ServiceNotification);
 
-            otp = ZulipStatusService.GoogleSSOLogin(realm);
+            otp = ZulipStatusService.InitializeSSOLogin(realm);
         }
 
         private void SSO_2nd_step_Click(object sender, EventArgs e)
