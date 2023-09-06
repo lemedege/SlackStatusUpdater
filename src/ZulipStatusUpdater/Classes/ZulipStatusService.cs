@@ -22,6 +22,7 @@ using Status = ZulipStatusUpdater.Models.Status;
 using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
 using RestSharp.Serialization.Json;
+using System.Xml.Linq;
 
 
 namespace ZulipStatusUpdater
@@ -41,7 +42,7 @@ namespace ZulipStatusUpdater
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
             var formData = new List<KeyValuePair<string, string>>() {
-                new KeyValuePair<string, string>("status_text", (status.SendIP ? status.Text +" "+  localIP: status.Text)),
+                new KeyValuePair<string, string>("status_text", (status.SendIP ? status.Text +" "+  localIP: (status.Text?? "").ToString())),
                 new KeyValuePair<string, string>("emoji_name", status.Emoji),
                 /*new KeyValuePair<string, string>("emoji_code", "1f697"),*/
                 /*new KeyValuePair<string, string>("reaction_type", "unicode_emoji"),*/
@@ -62,7 +63,17 @@ namespace ZulipStatusUpdater
 
             var response = client.Execute(request);
 
-            return response.StatusCode == System.Net.HttpStatusCode.OK;
+            if(response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                Program.runicon.Say(JObject.Parse(response.Content).SelectToken("$.msg").ToString(),System.Windows.Forms.ToolTipIcon.Error);
+                return false;
+            }
+
+            
         }
 
         public static bool SetZulipPresence(ActivityMonitor.ActivityState presence)
