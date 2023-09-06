@@ -77,8 +77,8 @@ namespace ZulipStatusUpdater
             using (TextWriter textWriter = new StreamWriter(SettingsFilePath))
             {
                 xmlSerializer.Serialize(textWriter, settings);
+                textWriter.Close();
             }
-
             // Set autostart setting to registry
             AutoStartManager.SetAutoStart(settings.AutoStart);
 
