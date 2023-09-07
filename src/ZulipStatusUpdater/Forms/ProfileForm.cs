@@ -78,6 +78,7 @@ namespace ZulipStatusUpdater.Forms
 
 
             //pictureBox1.Image = ZulipStatusService.GetProfilePicture();
+            //pictureBox1.ImageLocation = ZulipStatusService.GetProfilePicture();
             //pictureBox1.Load();
 
             BuildBottomButtons();
@@ -122,6 +123,7 @@ namespace ZulipStatusUpdater.Forms
                         break;
                     case ProfileField.FieldType.LIST_OF_OPTIONS:
                         ComboBox cbox = new ComboBox() { Dock = DockStyle.Fill, Tag = field.Id };
+                        cbox.Enabled = false;
                         foreach (FieldDataContent option in field.FieldData)
                         {
                             cbox.Items.Add(option.Text);

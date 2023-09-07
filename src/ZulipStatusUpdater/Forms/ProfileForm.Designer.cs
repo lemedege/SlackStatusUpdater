@@ -160,17 +160,16 @@
             // defaultStatusTable
             // 
             this.defaultStatusTable.AutoSize = true;
-            this.defaultStatusTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.defaultStatusTable.ColumnCount = 2;
             this.defaultStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.defaultStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.defaultStatusTable.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.defaultStatusTable.Location = new System.Drawing.Point(3, 366);
+            this.defaultStatusTable.Location = new System.Drawing.Point(3, 369);
             this.defaultStatusTable.Name = "defaultStatusTable";
             this.defaultStatusTable.RowCount = 2;
             this.defaultStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.defaultStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.defaultStatusTable.Size = new System.Drawing.Size(381, 3);
+            this.defaultStatusTable.Size = new System.Drawing.Size(381, 0);
             this.defaultStatusTable.TabIndex = 30;
             // 
             // LoginTab
@@ -204,7 +203,6 @@
             // 
             this.SettingsTable.AutoSize = true;
             this.SettingsTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.SettingsTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.SettingsTable.ColumnCount = 1;
             this.SettingsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.SettingsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -215,14 +213,13 @@
             this.SettingsTable.RowCount = 2;
             this.SettingsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.SettingsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SettingsTable.Size = new System.Drawing.Size(387, 23);
+            this.SettingsTable.Size = new System.Drawing.Size(387, 20);
             this.SettingsTable.TabIndex = 0;
             // 
             // LoginInfoTable
             // 
             this.LoginInfoTable.AutoSize = true;
             this.LoginInfoTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.LoginInfoTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.LoginInfoTable.ColumnCount = 2;
             this.LoginInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.LoginInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
