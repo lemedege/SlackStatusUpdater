@@ -70,7 +70,7 @@ namespace ZulipStatusUpdater
             }
             else
             {
-                Program.runicon.Say(JObject.Parse(response.Content).SelectToken("$.msg").ToString(),System.Windows.Forms.ToolTipIcon.Error);
+                Program.runicon.Say(JObject.Parse(response.Content).SelectToken("$.msg").ToString(),true,System.Windows.Forms.ToolTipIcon.Error);
                 return false;
             }
 
@@ -487,7 +487,7 @@ namespace ZulipStatusUpdater
             }
             catch
             {
-                Program.runicon.Say("Authentication failed");
+                Program.runicon.Say("Authentication failed",false,System.Windows.Forms.ToolTipIcon.Error);
             }
             return APIkey;
            }

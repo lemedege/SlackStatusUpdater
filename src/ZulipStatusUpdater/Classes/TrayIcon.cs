@@ -106,7 +106,7 @@ namespace ZulipStatusUpdater
             MouseEventArgs me = (MouseEventArgs)e;
             if (me.Button == MouseButtons.Left)
             {
-                Say("Force updating status");
+                Say("Force updating status", false);
                 UpdateProcess.Execute();
             }
         }
@@ -125,9 +125,13 @@ namespace ZulipStatusUpdater
             Say("Updates " + (SettingsManager.GetSettings().disableStatusUpdate ? "disabled" : "enabled"));
         }
 
-        public void Say(string text, ToolTipIcon icon = ToolTipIcon.Info)
+        public void Say(string text, bool only_once = true, ToolTipIcon icon = ToolTipIcon.Info)
         {
-            if (text != last_balloon_text)
+            if (text == last_balloon_text && only_once == true)
+            {
+                return;
+            }
+            else
             {
                 last_balloon_text = text;
                 int timeout = 3;
