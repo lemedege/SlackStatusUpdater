@@ -76,9 +76,19 @@ namespace ZulipStatusUpdater
                     var wifiNames = NetworkCheck.GetWifiConnectionSSIDs();
                     statusToSet = StatusProfileService.GetStatusWifi(wifiNames);
                 }
-                else if (!SettingsManager.GetSettings().overide_status)
+                else if (SettingsManager.GetSettings().overide_status)
+                {
+                    
+                }
+                else
                 {
                     statusToSet = StatusProfileService.GetStatusIP(localIP);
+
+                    if (SettingsManager.GetSettings().last_lunch_timestamp.AddMinutes(30) > DateTime.Now)
+                    {
+                        statusToSet.Text = "Lunch";
+                    }
+
                 }
                 // Null check and compare status to previous status. Update if changed.
                 if (statusToSet != null && (!statusToSet.Equals(_previousStatus)) || !localIP.Equals(_previousIP))

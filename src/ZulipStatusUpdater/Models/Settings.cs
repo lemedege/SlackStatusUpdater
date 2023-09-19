@@ -64,6 +64,9 @@ namespace ZulipStatusUpdater.Models
         [XmlElement("overide-status")]
         public bool overide_status { get; set; }
 
+        [XmlElement("last-lunch")]
+        public DateTime last_lunch_timestamp { get; set; }
+
 
         /// <summary>
         /// Use XmlIgnore attribute to prevent xml serialization. This field will be bound to the

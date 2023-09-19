@@ -22,6 +22,7 @@ namespace ZulipStatusUpdater
         public NotifyIcon TrayIcon;
         private ContextMenuStrip TrayIconContextMenu;
         private ToolStripMenuItem SettingsMenuItem;
+        private ToolStripMenuItem LunchMenuItem;
         private ToolStripMenuItem DisableMenuItem;
         private ToolStripMenuItem CloseMenuItem;
 
@@ -48,6 +49,7 @@ namespace ZulipStatusUpdater
             //Add a context menu to the TrayIcon:
             TrayIconContextMenu = new ContextMenuStrip();
             SettingsMenuItem = new ToolStripMenuItem();
+            LunchMenuItem = new ToolStripMenuItem();
             DisableMenuItem = new ToolStripMenuItem();
             CloseMenuItem = new ToolStripMenuItem();
             TrayIconContextMenu.SuspendLayout();
@@ -57,8 +59,9 @@ namespace ZulipStatusUpdater
             // 
             this.TrayIconContextMenu.Items.AddRange(new ToolStripItem[] {
             this.SettingsMenuItem,
+            this.LunchMenuItem,
             this.DisableMenuItem,
-            this.CloseMenuItem});
+            this.CloseMenuItem}); ;
 
             this.TrayIconContextMenu.Name = "TrayIconContextMenu";
 
@@ -69,6 +72,15 @@ namespace ZulipStatusUpdater
             this.SettingsMenuItem.Text = "Settings";
             this.SettingsMenuItem.Click += new EventHandler(this.SettingsItem_Click);
 
+
+            // 
+            // LunchMenuItem
+            // 
+            this.LunchMenuItem.Name = "LunchMenuItem";
+            this.LunchMenuItem.Text = "Go to lunch";
+            this.LunchMenuItem.Click += new EventHandler(this.LunchItem_Click);
+
+
             // 
             // DisableSettingsMenu
             // 
@@ -76,6 +88,8 @@ namespace ZulipStatusUpdater
             this.DisableMenuItem.Text = "Disable";
             this.DisableMenuItem.CheckOnClick = true;
             this.DisableMenuItem.Click += new EventHandler(this.DisableItem_Click);
+
+
 
             // 
             // CloseMenuItem
@@ -164,6 +178,21 @@ namespace ZulipStatusUpdater
                 _ProfileForm.Dispose();
             }
         }
+
+
+        /// <summary>
+        /// Handle Lunch click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LunchItem_Click(object sender, EventArgs e)
+        {
+            Program.runicon.Say("Going to lunch", false);
+            var settings = SettingsManager.GetSettings();
+            settings.last_lunch_timestamp = DateTime.Now;
+            SettingsManager.ApplySettings(settings);
+        }
+
 
     }
 }
