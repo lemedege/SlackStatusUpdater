@@ -187,9 +187,17 @@ namespace ZulipStatusUpdater
         /// <param name="e"></param>
         private void LunchItem_Click(object sender, EventArgs e)
         {
-            Program.runicon.Say("Going to lunch", false);
             var settings = SettingsManager.GetSettings();
-            settings.last_lunch_timestamp = DateTime.Now;
+            if (settings.last_lunch_timestamp.AddMinutes(settings.lunch_duration_minutes) > DateTime.Now)
+            {
+                Program.runicon.Say("Came back from lunch", false);
+                settings.last_lunch_timestamp = DateTime.Now.AddMinutes(settings.lunch_duration_minutes * -1);
+            }
+            else
+            {
+                Program.runicon.Say("Going to lunch", false);
+                settings.last_lunch_timestamp = DateTime.Now;
+            }
             SettingsManager.ApplySettings(settings);
         }
 

@@ -63,20 +63,22 @@ namespace ZulipStatusUpdater
         {
             Program.runicon.SetIconHoverText(ZulipStatusService.CheckServerStatus()? "Connected" : "Not connected");
 
+            var _settings = SettingsManager.GetSettings();
+
             string localIP = NetworkCheck.GetCurrentIP();
 
-            if (!SettingsManager.GetSettings().disableStatusUpdate)
+            if (!_settings.disableStatusUpdate)
             {
-                var statusToSet = SettingsManager.GetSettings().DefaultStatus;
+                var statusToSet = _settings.DefaultStatus;
 
                 // Find out the corresponding status to be set
-                if (SettingsManager.GetSettings().usewifi)
+                if (_settings.usewifi)
                 {
                     // Get connected SSIDs
                     var wifiNames = NetworkCheck.GetWifiConnectionSSIDs();
                     statusToSet = StatusProfileService.GetStatusWifi(wifiNames);
                 }
-                else if (SettingsManager.GetSettings().overide_status)
+                else if (_settings.overide_status)
                 {
                     
                 }
@@ -84,7 +86,7 @@ namespace ZulipStatusUpdater
                 {
                     statusToSet = StatusProfileService.GetStatusIP(localIP);
 
-                    if (SettingsManager.GetSettings().last_lunch_timestamp.AddMinutes(30) > DateTime.Now)
+                    if (_settings.last_lunch_timestamp.AddMinutes(_settings.lunch_duration_minutes) > DateTime.Now)
                     {
                         statusToSet.Text = "Lunch";
                     }

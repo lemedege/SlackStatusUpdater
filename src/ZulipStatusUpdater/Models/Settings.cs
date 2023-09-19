@@ -24,6 +24,7 @@ namespace ZulipStatusUpdater.Models
             idleThreshold = 1000 * 140;
             offlineThreshold = 1000 * 60 * 30;
             overide_status = false;
+            lunch_duration_minutes = 30;
            
 
         }
@@ -67,6 +68,9 @@ namespace ZulipStatusUpdater.Models
         [XmlElement("last-lunch")]
         public DateTime last_lunch_timestamp { get; set; }
 
+
+        [XmlElement("lunch-duration")]
+        public int lunch_duration_minutes { get; set; }
 
         /// <summary>
         /// Use XmlIgnore attribute to prevent xml serialization. This field will be bound to the
