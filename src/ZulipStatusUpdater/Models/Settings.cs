@@ -23,6 +23,7 @@ namespace ZulipStatusUpdater.Models
             local_server = "192.168.111.100";
             idleThreshold = 1000 * 140;
             offlineThreshold = 1000 * 60 * 30;
+            overide_status = false;
            
 
         }
@@ -59,6 +60,9 @@ namespace ZulipStatusUpdater.Models
 
         [XmlElement("use-wifi")]
         public bool usewifi { get; set; }
+
+        [XmlElement("overide-status")]
+        public bool overide_status { get; set; }
 
 
         /// <summary>

@@ -45,7 +45,7 @@ namespace ZulipStatusUpdater.Forms
         Label defaultEmojiLabel = new Label();
         TextBox defaultStatusTb = new TextBox();
         Label defaultStatusLabel = new Label();
-        CheckBox enableDefaultStatus = new CheckBox();
+        CheckBox overrideUsingDefault = new CheckBox();
 
         ToolStripStatusLabel ConnectionStatusTsIcon = new ToolStripStatusLabel();
         ToolStripStatusLabel ConnectionStatusTsLabel = new ToolStripStatusLabel();
@@ -170,8 +170,7 @@ namespace ZulipStatusUpdater.Forms
             SettingsTable.Controls.Add(idleTimePanel, 0, -1);
 
             run_at_startup_cbox.DataBindings.Add("Checked", _settings, "AutoStart", false, DataSourceUpdateMode.OnPropertyChanged);
-            IdleTimeNum.DataBindings.Add("Value", _settings, "idleThreshold", false, DataSourceUpdateMode.OnPropertyChanged);
-
+            IdleTimeNum.DataBindings.Add("Value", _settings, "idleThreshold", true, DataSourceUpdateMode.OnPropertyChanged);
         }
 
 
@@ -266,15 +265,16 @@ namespace ZulipStatusUpdater.Forms
             defaultStatusLabel.TextAlign = ContentAlignment.MiddleCenter;
             defaultStatusLabel.Anchor = AnchorStyles.Left;
 
-            enableDefaultStatus.Text = "Set default status when no match in table";
-            enableDefaultStatus.AutoSize = true;
+            overrideUsingDefault.Text = "Override automatic status with default status";
+            overrideUsingDefault.AutoSize = true;
 
             defaultStatusTable.Controls.Add(defaultEmojiLabel, 1, 0);
             defaultStatusTable.Controls.Add(defaultEmojiTb, 1, 1);
             defaultStatusTable.Controls.Add(defaultStatusLabel, 0, 0);
             defaultStatusTable.Controls.Add(defaultStatusTb, 0, 1);
-            defaultStatusTable.Controls.Add(enableDefaultStatus, 0, 2);
+            defaultStatusTable.Controls.Add(overrideUsingDefault, 0, 2);
 
+            overrideUsingDefault.DataBindings.Add("Checked", _settings, "overide_status", true, DataSourceUpdateMode.OnPropertyChanged);
             defaultEmojiTb.DataBindings.Add("Text", _settings.DefaultStatus, "Emoji", false, DataSourceUpdateMode.OnPropertyChanged);
             defaultStatusTb.DataBindings.Add("Text", _settings.DefaultStatus, "Text", false, DataSourceUpdateMode.OnPropertyChanged);
         }
@@ -325,7 +325,7 @@ namespace ZulipStatusUpdater.Forms
             foreach (ProfileField field in filled_fields)
             {
                 var match = tableProfileFields.Controls.Find(field.Id.ToString(), true);
-                foreach (Control tb in tableProfileFields.Controls.OfType<TextBox>())
+                foreach (System.Windows.Forms.Control tb in tableProfileFields.Controls.OfType<TextBox>())
                 {
                     if (tb.Tag.ToString() == field.Id.ToString())
                     {

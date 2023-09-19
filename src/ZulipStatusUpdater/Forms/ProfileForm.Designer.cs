@@ -44,6 +44,7 @@
             this.LoginInfoTable = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.overrideStatusTable = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl.SuspendLayout();
             this.ProfileTab.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -138,13 +139,15 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.dgWifi, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.overrideStatusTable, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.defaultStatusTable, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(396, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(387, 372);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
@@ -164,7 +167,7 @@
             this.defaultStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.defaultStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.defaultStatusTable.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.defaultStatusTable.Location = new System.Drawing.Point(3, 369);
+            this.defaultStatusTable.Location = new System.Drawing.Point(3, 349);
             this.defaultStatusTable.Name = "defaultStatusTable";
             this.defaultStatusTable.RowCount = 2;
             this.defaultStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -254,6 +257,21 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(800, 0);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
+            // overrideStatusTable
+            // 
+            this.overrideStatusTable.AutoSize = true;
+            this.overrideStatusTable.ColumnCount = 2;
+            this.overrideStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.overrideStatusTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.overrideStatusTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.overrideStatusTable.Location = new System.Drawing.Point(3, 369);
+            this.overrideStatusTable.Name = "overrideStatusTable";
+            this.overrideStatusTable.RowCount = 2;
+            this.overrideStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.overrideStatusTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.overrideStatusTable.Size = new System.Drawing.Size(381, 0);
+            this.overrideStatusTable.TabIndex = 31;
+            // 
             // ProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,5 +318,6 @@
         private System.Windows.Forms.TableLayoutPanel defaultStatusTable;
         private System.Windows.Forms.TableLayoutPanel tableProfile;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TableLayoutPanel overrideStatusTable;
     }
 }
