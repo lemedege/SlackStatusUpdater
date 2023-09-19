@@ -76,7 +76,7 @@ namespace ZulipStatusUpdater
                     var wifiNames = NetworkCheck.GetWifiConnectionSSIDs();
                     statusToSet = StatusProfileService.GetStatusWifi(wifiNames);
                 }
-                else
+                else if (!SettingsManager.GetSettings().overide_status)
                 {
                     statusToSet = StatusProfileService.GetStatusIP(localIP);
                 }
@@ -110,7 +110,6 @@ namespace ZulipStatusUpdater
             }
             // Check presence
             ActivityMonitor.ActivityState currentPresence = ActivityMonitor.GetPresenceUpdate();
-            //Program.runicon.Say(((int)currentPresence).ToString());
 
             if (!SettingsManager.GetSettings().disablePresenceUpdate)
             {
