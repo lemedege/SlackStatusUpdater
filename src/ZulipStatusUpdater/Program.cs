@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Security.Policy;
@@ -43,6 +44,12 @@ namespace ZulipStatusUpdater
                 Application.Exit();
                 return;
             }
+            if (PriorProcess() != null)
+            {
+                MessageBox.Show("Another instance of "+ Constants.NAME_OF_APP + " is already running.");
+                Application.Exit();
+                return;
+            }
 
             // Start automatic status updates process
             runicon = new RunIcon();
@@ -50,5 +57,23 @@ namespace ZulipStatusUpdater
             // Make sure the application runs!
             Application.Run(Program.runicon);
         }
+
+        public static Process PriorProcess()
+        // Returns a System.Diagnostics.Process pointing to
+        // a pre-existing process with the same name as the
+        // current one, if any; or null if the current process
+        // is unique.
+        {
+            Process curr = Process.GetCurrentProcess();
+            Process[] procs = Process.GetProcessesByName(curr.ProcessName);
+            foreach (Process p in procs)
+            {
+                if ((p.Id != curr.Id) &&
+                    (p.MainModule.FileName == curr.MainModule.FileName))
+                    return p;
+            }
+            return null;
+        }
+
     }
 }
